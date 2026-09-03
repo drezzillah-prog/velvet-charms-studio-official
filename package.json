@@ -5,6 +5,6 @@
   "type": "module",
   "engines": { "node": "24.x" },
   "scripts": {
-    "test": "node tests/studio-contract.mjs"
+    "test": "node tests/studio-contract.mjs && node tests/catalogue-source-live.mjs"
   }
 }
