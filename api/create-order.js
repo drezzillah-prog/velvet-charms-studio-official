@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { STUDIO_CURRENCY, marketFromRequest, validateCart } from "../lib/catalogue-source.js";
 
+function storeIsLive() { return String(process.env.STORE_LIVE || "").toLowerCase() === "true"; }
 function paypalBaseUrl() {
   const mode = String(process.env.PAYPAL_ENV || process.env.PAYPAL_MODE || "live").toLowerCase();
   return mode === "sandbox" ? "https://api-m.sandbox.paypal.com" : "https://api-m.paypal.com";
@@ -47,6 +48,7 @@ export default async function handler(req, res) {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
   }
+  if (!storeIsLive()) return res.status(503).json({ error: "The Studio checkout is not live yet." });
   try {
     const market = marketFromRequest(req);
     const items = await validateCart(req.body?.cart, market);
