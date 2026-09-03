@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shop — Velvet Charms Studio</title>
+  <meta name="description" content="Shop the Velvet Charms Studio launch collection: art, gifts, textile creations and selected non-cosmetic pieces.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Velvet Charms <span>Studio</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="catalogue.html" aria-current="page">Shop</a>
+    </nav>
+  </header>
+
+  <main class="catalogue-page">
+    <section class="catalogue-intro">
+      <p class="eyebrow">PHASE 1 COLLECTION</p>
+      <h1>Launch-ready handmade pieces.</h1>
+      <p>All Art & Gifts products are included. From Body Glow, only the non-cosmetic textile collection is offered for sale here. Candles are shown separately as a preview until their formulation-specific CLP/label review is completed. Cosmetics are intentionally excluded.</p>
+    </section>
+
+    <div class="filter-bar" id="filter-bar" aria-label="Catalogue filters">
+      <button class="filter active" type="button" data-filter="all">All launch products</button>
+      <button class="filter" type="button" data-filter="art">Art & Gifts</button>
+      <button class="filter" type="button" data-filter="textiles">Textiles & comfort</button>
+      <button class="filter" type="button" data-filter="preview">Candle preview</button>
+    </div>
+
+    <p id="catalogue-status" class="catalogue-status">Loading the approved launch collection…</p>
+    <div id="catalogue-root" class="catalogue-root" aria-live="polite"></div>
+  </main>
+
+  <dialog id="product-dialog" class="product-dialog">
+    <button class="dialog-close" type="button" aria-label="Close">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <footer>
+    <strong>Velvet Charms Studio</strong>
+    <span>Phase 1 — cosmetics excluded from sale.</span>
+  </footer>
+  <script src="studio.js" defer></script>
+</body>
+</html>
