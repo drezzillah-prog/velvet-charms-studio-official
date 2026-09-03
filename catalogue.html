@@ -4,23 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Shop — Velvet Charms Studio</title>
-  <meta name="description" content="Shop the Velvet Charms Studio launch collection: art, gifts, textile creations and selected non-cosmetic pieces.">
+  <meta name="description" content="Shop the Velvet Charms Studio launch collection: handmade art, gifts, textile creations and selected non-cosmetic pieces.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="index.html">Velvet Charms <span>Studio</span></a>
-    <nav>
+    <nav aria-label="Primary navigation">
       <a href="index.html">Home</a>
       <a href="catalogue.html" aria-current="page">Shop</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="legal.html">Policies</a>
     </nav>
+    <button class="cart-button" type="button" data-open-cart>Bag <span data-cart-count>0</span></button>
   </header>
 
   <main class="catalogue-page">
+    <div id="payment-banner" class="payment-banner" hidden></div>
     <section class="catalogue-intro">
-      <p class="eyebrow">PHASE 1 COLLECTION</p>
-      <h1>Launch-ready handmade pieces.</h1>
-      <p>All Art & Gifts products are included. From Body Glow, only the non-cosmetic textile collection is offered for sale here. Candles are shown separately as a preview until their formulation-specific CLP/label review is completed. Cosmetics are intentionally excluded.</p>
+      <p class="eyebrow">THE STUDIO COLLECTION</p>
+      <h1>Handmade pieces ready for the first Velvet Charms Studio chapter.</h1>
+      <p>Art, gifts and textile pieces are available for ordering here. Candles are shown only as a preview until their safety-label review is complete. Body creams, soaps, perfumes, body oils and other cosmetic preparations are not sold on this Studio launch site.</p>
     </section>
 
     <div class="filter-bar" id="filter-bar" aria-label="Catalogue filters">
@@ -30,7 +35,7 @@
       <button class="filter" type="button" data-filter="preview">Candle preview</button>
     </div>
 
-    <p id="catalogue-status" class="catalogue-status">Loading the approved launch collection…</p>
+    <p id="catalogue-status" class="catalogue-status">Loading the Studio collection…</p>
     <div id="catalogue-root" class="catalogue-root" aria-live="polite"></div>
   </main>
 
@@ -39,9 +44,26 @@
     <div id="dialog-content"></div>
   </dialog>
 
+  <div id="cart-backdrop" class="cart-backdrop" aria-hidden="true"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping bag" aria-live="polite">
+    <div class="cart-head">
+      <div><p class="eyebrow">YOUR ORDER</p><h2>Shopping bag</h2></div>
+      <button type="button" class="cart-close" data-close-cart aria-label="Close shopping bag">×</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-checkout">
+      <label class="field"><span>Preferred delivery / gift date <small>(optional, not guaranteed)</small></span><input id="required-by-date" type="date"></label>
+      <div class="cart-total-row"><span>Product total</span><strong id="cart-total">€0.00</strong></div>
+      <p class="checkout-note">Shipping is confirmed according to destination and the final order. PayPal shows the payment before you approve it.</p>
+      <button id="checkout-btn" class="btn primary full" type="button">Continue securely with PayPal</button>
+      <p id="checkout-status" class="checkout-status" role="status"></p>
+      <p class="checkout-legal">By continuing, you confirm that you have read the <a href="legal.html">shop policies</a>.</p>
+    </div>
+  </aside>
+
   <footer>
-    <strong>Velvet Charms Studio</strong>
-    <span>Phase 1 — cosmetics excluded from sale.</span>
+    <div><strong>Velvet Charms Studio</strong><span>Handmade art, gifts and comfort pieces.</span></div>
+    <div class="footer-links"><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="legal.html">Policies</a></div>
   </footer>
   <script src="studio.js" defer></script>
 </body>
