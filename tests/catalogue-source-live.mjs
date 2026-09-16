@@ -1,33 +1,28 @@
-import { publicCatalogue, studioCatalogue, BODY_SELLABLE_CATEGORY, BODY_PREVIEW_CATEGORY } from '../lib/catalogue-source.js';
+import { publicCatalogue, studioCatalogue, STUDIO_CURRENCY, STUDIO_MARKET } from '../lib/catalogue-source.js';
 
 const payload = await publicCatalogue();
-if (payload.sourceMode !== 'immutable-pinned') throw new Error('catalogue source mode is not immutable-pinned');
-if (payload.sourceCommits.art !== 'a29437db52068129f0c5db9e7a6aa41de96fa929') throw new Error('Art & Gifts source commit changed');
+if (payload.sourceMode !== 'immutable-pinned-us-v1') throw new Error('catalogue source mode is not immutable-pinned-us-v1');
 if (payload.sourceCommits.body !== '543bad871521bc1dace35cdf5d02b0f6aa2de279') throw new Error('Body Glow source commit changed');
-
-const saleSections = payload.sections.filter(section => section.kind !== 'preview');
-const previewSections = payload.sections.filter(section => section.kind === 'preview');
-if (!saleSections.length) throw new Error('no sellable Studio sections loaded');
-if (!previewSections.some(section => section.category?.name === BODY_PREVIEW_CATEGORY)) throw new Error('candle preview section missing');
-if (!saleSections.some(section => section.source === 'body' && section.category?.name === BODY_SELLABLE_CATEGORY)) throw new Error('approved Body Glow textile section missing');
-if (saleSections.some(section => section.source === 'body' && section.category?.name !== BODY_SELLABLE_CATEGORY)) throw new Error('unapproved Body Glow category entered sale allowlist');
-if (saleSections.some(section => section.source === 'art' && section.category?.name === 'Bundles')) throw new Error('Art & Gifts Bundles entered sale allowlist');
+if (STUDIO_CURRENCY !== 'USD' || payload.currency !== 'USD') throw new Error('USA Studio must use USD');
+if (STUDIO_MARKET !== 'US' || payload.market !== 'US') throw new Error('USA Studio market gate missing');
+if (!payload.sections.length) throw new Error('no USA V1 sections loaded');
+if (payload.sections.some(section => section.source !== 'body' || section.kind !== 'us-v1')) throw new Error('non-USA-V1 source entered catalogue');
 
 const flatten = category => [
   ...(category.products || []),
   ...(category.subcategories || []).flatMap(sub => sub.products || [])
 ];
-const saleProducts = saleSections.flatMap(section => flatten(section.category).map(product => ({...product, source: section.source})));
-for (const blockedId of ['epoxy_lamp', 'wall_clock_large']) {
-  if (saleProducts.some(product => product.id === blockedId)) throw new Error(`blocked product entered public sale payload: ${blockedId}`);
-}
-if (!saleProducts.every(product => product.id && product.name && Number.isFinite(Number(product.price)))) throw new Error('sellable product missing id, name or price');
+const products = payload.sections.flatMap(section => flatten(section.category));
+const allowed = new Set(['body_butter_100','face_cream','hand_foot_cream','solid_perfume','perfume_rollon','soap_exfoliating','soap_moisturizing','soap_herbal']);
+if (products.some(product => !allowed.has(product.id))) throw new Error('product outside approved USA V1 entered catalogue');
+for (const id of allowed) if (!products.some(product => product.id === id)) throw new Error(`approved USA V1 product missing from source: ${id}`);
+if (!products.every(product => product.id && product.name && Number.isFinite(Number(product.price)))) throw new Error('USA V1 product missing id, name or price');
+if (!products.every(product => product.__launch_status === 'compliance-gated')) throw new Error('USA compliance gate metadata missing');
 
 const serverMap = await studioCatalogue();
-if (serverMap.size !== saleProducts.length) throw new Error(`public/server sellable counts diverge: public=${saleProducts.length}, server=${serverMap.size}`);
+if (serverMap.size !== products.length) throw new Error(`public/server counts diverge: public=${products.length}, server=${serverMap.size}`);
 for (const [key, product] of serverMap) {
-  if (!/^(art|body):/.test(key)) throw new Error(`invalid server product key ${key}`);
-  if (key.startsWith('body:') && product.__source !== 'body') throw new Error(`Body source mismatch for ${key}`);
+  if (!key.startsWith('body:') || product.__source !== 'body') throw new Error(`source mismatch for ${key}`);
 }
 
-console.log(`Velvet Charms Studio immutable catalogue source PASS — ${serverMap.size} sellable products, ${previewSections.reduce((sum, section) => sum + flatten(section.category).length, 0)} preview candle products`);
+console.log(`Velvet Charms Studio USA V1 catalogue PASS — ${serverMap.size} compliance-gated products in USD`);
