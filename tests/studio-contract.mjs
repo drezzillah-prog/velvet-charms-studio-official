@@ -14,7 +14,9 @@ if(!publicApi.includes('publicCatalogue')||!publicApi.includes('marketFromReques
 for(const endpoint of ['/api/store-status','/api/create-order','/api/capture-order']) if(!studio.includes(endpoint)) throw new Error(`client lost ${endpoint}`);
 if(!createOrder.includes('STORE_LIVE')||!createOrder.includes('market !== "US"')) throw new Error('launch/USA checkout gate missing');
 if(!createOrder.includes('validateCart')||!captureOrder.includes('validateCart')) throw new Error('server cart validation missing');
-if(!captureOrder.includes('fingerprint(items, date)')) throw new Error('capture fingerprint validation missing');
+if(!/fingerprint\s*\(\s*items\s*,\s*date\s*\)/.test(captureOrder)) throw new Error('capture fingerprint validation missing');
+if(!/\^\(US\)/.test(captureOrder)||/RO\|INTL/.test(captureOrder)) throw new Error('capture metadata must be USA-only');
+if(!captureOrder.includes('STUDIO_CURRENCY')||captureOrder.includes('Paid product total: EUR')) throw new Error('capture seller handoff must use Studio USD currency');
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.includes('image-lightbox')) throw new Error('gallery/lightbox UX missing');
 if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
