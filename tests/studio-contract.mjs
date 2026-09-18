@@ -10,6 +10,9 @@ if(defs.includes('us_rollon_citrus_bloom')) throw new Error('Citrus Bloom must r
 if(!source.includes('PRODUCT_NOT_READY')) throw new Error('product readiness checkout gate missing');
 if(!source.includes('__fragrance_gate')||!source.includes('__supplier_formula_gate')) throw new Error('server must gate fragrance and supplier-formula products');
 if(!studio.includes('__fragrance_gate')||!studio.includes('__supplier_formula_gate')) throw new Error('browser must visibly gate fragrance and supplier-formula products');
+if(!studio.includes('function gated(p)')) throw new Error('browser must centralize supplier/fragrance readiness gating');
+if(!studio.includes('state.cart=state.cart.filter')) throw new Error('browser must purge stale gated products from saved carts');
+if(!studio.includes('!gated(x.m.product)')) throw new Error('cart rendering must exclude supplier/fragrance-gated products');
 if(!studio.includes("fetch('/api/catalogue'")) throw new Error('browser catalogue must use Studio API');
 if(studio.includes('raw.githubusercontent.com')) throw new Error('browser bypasses authoritative API');
 if(!publicApi.includes('publicCatalogue')||!publicApi.includes('marketFromRequest')) throw new Error('catalogue API routing missing');
