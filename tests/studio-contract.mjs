@@ -7,7 +7,9 @@ if(source.includes('a29437db52068129f0c5db9e7a6aa41de96fa929')) throw new Error(
 if(!source.includes('STUDIO_CURRENCY="USD"')||!source.includes('STUDIO_MARKET="US"')) throw new Error('USA/USD contract missing');
 for(const id of ['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_solid_perfume_vanilla_orchid','us_rollon_lavender_mist','us_soap_exfoliating']) if(!defs.includes(id)) throw new Error(`USA V1 definition missing ${id}`);
 if(defs.includes('us_rollon_citrus_bloom')) throw new Error('Citrus Bloom must remain unfrozen until exact material review');
-if(!source.includes('PRODUCT_NOT_READY')) throw new Error('supplier-dependent product checkout gate missing');
+if(!source.includes('PRODUCT_NOT_READY')) throw new Error('product readiness checkout gate missing');
+if(!source.includes('__fragrance_gate')||!source.includes('__supplier_formula_gate')) throw new Error('server must gate fragrance and supplier-formula products');
+if(!studio.includes('__fragrance_gate')||!studio.includes('__supplier_formula_gate')) throw new Error('browser must visibly gate fragrance and supplier-formula products');
 if(!studio.includes("fetch('/api/catalogue'")) throw new Error('browser catalogue must use Studio API');
 if(studio.includes('raw.githubusercontent.com')) throw new Error('browser bypasses authoritative API');
 if(!publicApi.includes('publicCatalogue')||!publicApi.includes('marketFromRequest')) throw new Error('catalogue API routing missing');
