@@ -26,7 +26,12 @@ if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) t
 if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.includes('image-lightbox')) throw new Error('gallery/lightbox UX missing');
 if(!fs.existsSync('assets/velvet-charms-usa-hero.jpg')) throw new Error('approved USA hero asset missing');
 if(!styles.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('approved USA hero is not wired into storefront CSS');
-if(!studio.includes('`${Number(p.price||0).toFixed(2)}`')) throw new Error('browser price formatter must render USD dollars');
+if(!studio.includes('function money(p){return`
+if(!legal.includes('Studio USA uses USD')) throw new Error('USA currency disclosure missing');
+if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
+if(/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder+captureOrder)) throw new Error('PayPal secret hardcoded');
+console.log('Velvet Charms Studio USA V1 integrity contract PASS');
+)) throw new Error('browser price formatter must render USD dollars');
 if(!legal.includes('Studio USA uses USD')) throw new Error('USA currency disclosure missing');
 if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
 if(/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder+captureOrder)) throw new Error('PayPal secret hardcoded');
