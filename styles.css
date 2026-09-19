@@ -24,3 +24,9 @@
 .hero-card{background:rgba(42,15,31,.58);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 60px rgba(0,0,0,.22)}
 .hero-card .velvet-orb{opacity:.35}
 @media(max-width:760px){.hero{padding:2rem 1.25rem;min-height:78vh;background-position:58% center}.hero::before{background:linear-gradient(180deg,rgba(24,8,18,.72),rgba(42,15,31,.48))}.hero-copy{padding:1.2rem}.hero-card{min-height:260px}}
+
+
+/* Keyboard and motion polish */
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media(max-width:620px){main{width:min(100% - 1.25rem,1220px)}.hero{border-radius:24px}.hero h1{font-size:clamp(2.8rem,15vw,4.6rem)}.hero-actions .btn{width:100%}.site-header nav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.25rem}.site-header nav a{white-space:nowrap}}
