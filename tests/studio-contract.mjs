@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs'];
 for(const file of requiredFiles) if(!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
-const studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
+const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
 if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
 if(source.includes('a29437db52068129f0c5db9e7a6aa41de96fa929')) throw new Error('Art & Gifts must not feed USA Studio');
 if(!source.includes('STUDIO_CURRENCY="USD"')||!source.includes('STUDIO_MARKET="US"')) throw new Error('USA/USD contract missing');
@@ -24,6 +24,10 @@ if(!/\^\(US\)/.test(captureOrder)||/RO\|INTL/.test(captureOrder)) throw new Erro
 if(!captureOrder.includes('STUDIO_CURRENCY')||captureOrder.includes('Paid product total: EUR')) throw new Error('capture seller handoff must use Studio USD currency');
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.includes('image-lightbox')) throw new Error('gallery/lightbox UX missing');
+if(!fs.existsSync('assets/velvet-charms-usa-hero.jpg')) throw new Error('approved USA hero asset missing');
+if(!styles.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('approved USA hero is not wired into storefront CSS');
+if(!studio.includes('`${Number(p.price||0).toFixed(2)}`')) throw new Error('browser price formatter must render USD dollars');
+if(!legal.includes('Studio USA uses USD')) throw new Error('USA currency disclosure missing');
 if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
 if(/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder+captureOrder)) throw new Error('PayPal secret hardcoded');
 console.log('Velvet Charms Studio USA V1 integrity contract PASS');
