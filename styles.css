@@ -13,3 +13,14 @@
 @media(max-width:1000px){.site-header{flex-wrap:wrap}.site-header nav{order:3;width:100%}}
 @media(max-width:900px){.hero{grid-template-columns:1fr;gap:1.5rem}.hero-card{min-height:320px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dialog-wrap{grid-template-columns:1fr}.dialog-main-image{min-height:280px;max-height:420px}.split,.future-grid,.contact-grid{grid-template-columns:1fr}}
 @media(max-width:620px){.site-header{align-items:flex-start;gap:.7rem}.site-header nav{gap:.75rem}.hero{padding-top:3rem}.product-grid{grid-template-columns:1fr}.category-heading{align-items:flex-start;flex-direction:column}.product-actions{flex-direction:column}.customization-grid{grid-template-columns:1fr}.field-wide{grid-column:auto}footer{flex-direction:column}.brand{font-size:1.5rem}.cart-button{position:absolute;right:1rem;top:.8rem}.dialog-copy{padding:1.35rem}.image-lightbox{padding:1rem}.card-thumbs img{width:40px;height:40px}}
+
+
+/* USA homepage hero — approved visual */
+.hero{position:relative;isolation:isolate;margin-top:1.25rem;padding:clamp(3rem,7vw,6rem);min-height:76vh;border-radius:34px;overflow:hidden;background:url('assets/velvet-charms-usa-hero.jpg') center/cover no-repeat;box-shadow:0 28px 70px rgba(42,15,31,.18)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(24,8,18,.76) 0%,rgba(42,15,31,.56) 43%,rgba(42,15,31,.12) 76%,rgba(42,15,31,.08) 100%)}
+.hero-copy{max-width:720px;padding:2rem;border-radius:28px;background:rgba(34,14,26,.28);backdrop-filter:blur(2px)}
+.hero .eyebrow{color:#f0d58a}.hero h1{color:#fffaf6;text-shadow:0 2px 18px rgba(0,0,0,.28)}.hero .lead{color:#fff7f5;text-shadow:0 1px 12px rgba(0,0,0,.32)}
+.hero .btn.primary{background:#fffaf6;color:var(--plum);border-color:#fffaf6}.hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.75);background:rgba(42,15,31,.22)}
+.hero-card{background:rgba(42,15,31,.58);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.hero-card .velvet-orb{opacity:.35}
+@media(max-width:760px){.hero{padding:2rem 1.25rem;min-height:78vh;background-position:58% center}.hero::before{background:linear-gradient(180deg,rgba(24,8,18,.72),rgba(42,15,31,.48))}.hero-copy{padding:1.2rem}.hero-card{min-height:260px}}
