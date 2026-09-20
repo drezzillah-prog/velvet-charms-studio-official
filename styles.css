@@ -30,3 +30,6 @@
 :where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @media(max-width:620px){main{width:min(100% - 1.25rem,1220px)}.hero{border-radius:24px}.hero h1{font-size:clamp(2.8rem,15vw,4.6rem)}.hero-actions .btn{width:100%}.site-header nav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.25rem}.site-header nav a{white-space:nowrap}}
+
+/* USA V1 catalogue readiness labels */
+.availability-tag{display:inline-block;align-self:flex-start;margin:0 0 .45rem .35rem;padding:.3rem .52rem;border-radius:999px;font-size:.64rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}.availability-tag.preview{background:#edf4ed;color:#365a3c}.availability-tag.pending{background:#fff3d3;color:#785f16}
