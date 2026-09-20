@@ -19,6 +19,11 @@ const expectedIds=['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_10
 for(const id of expectedIds) if(!products.some(p=>p.id===id)) throw new Error(`required USA V1 product missing: ${id}`);
 if(products.filter(p=>p.__fragrance_gate).length!==7) throw new Error('USA fragrance gate count changed');
 if(products.filter(p=>p.__supplier_formula_gate).length!==4) throw new Error('USA supplier-formula gate count changed');
+const butter=products.find(p=>p.id==='us_body_butter_100');
+if(JSON.stringify(butter?.options?.scent)!==JSON.stringify(['Unscented'])) throw new Error('Body Butter must not inherit unsupported legacy scent variants');
+for(const p of products.filter(p=>p.id.startsWith('us_refill_'))) if(p.options?.scent||p.options?.vessel_preference) throw new Error(`refill inherited incompatible legacy options: ${p.id}`);
+for(const p of products.filter(p=>p.id.startsWith('us_solid_perfume_')||p.id.startsWith('us_rollon_'))) if(p.options?.scent) throw new Error(`formula-specific fragrance product inherited generic scent selector: ${p.id}`);
+for(const p of products.filter(p=>p.id.startsWith('us_soap_'))) if(p.options?.aroma) throw new Error(`supplier-gated soap inherited unfrozen aroma selector: ${p.id}`);
 
 const serverMap = await studioCatalogue();
 if (serverMap.size !== products.length) throw new Error(`public/server counts diverge: public=${products.length}, server=${serverMap.size}`);
