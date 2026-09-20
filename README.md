@@ -12,6 +12,7 @@ Planned families:
 - Body Butter — 100 ml retail fill; 100 g development formula basis.
 - Nourishing Face Balm — 50 ml retail fill; 100 g development formula basis.
 - Hand & Foot Balm — 50 ml retail fill; 100 g development formula basis.
+- Same-master-formula refills — Body Butter 100 ml, Nourishing Face Balm 50 ml, Hand & Foot Balm 50 ml.
 - Solid Perfume — 50 ml.
 - Perfume Oil Roll-On — 10 ml.
 - Glycerin/melt-and-pour soaps — 100 g source format where verified.
