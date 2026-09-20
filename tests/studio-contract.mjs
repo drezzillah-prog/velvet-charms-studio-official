@@ -22,6 +22,8 @@ if(!createOrder.includes('validateCart')||!captureOrder.includes('validateCart')
 if(!/fingerprint\s*\(\s*items\s*,\s*date\s*\)/.test(captureOrder)) throw new Error('capture fingerprint validation missing');
 if(!/\^\(US\)/.test(captureOrder)||/RO\|INTL/.test(captureOrder)) throw new Error('capture metadata must be USA-only');
 if(!captureOrder.includes('STUDIO_CURRENCY')||captureOrder.includes('Paid product total: EUR')) throw new Error('capture seller handoff must use Studio USD currency');
+if(!catalogue.includes('catalogue-key')||!styles.includes('.catalogue-summary')) throw new Error('catalogue readiness legend missing');
+if(!styles.includes('.filter-bar{flex-wrap:nowrap')&&!styles.includes('.filter-bar{flex-wrap:nowrap;')) throw new Error('mobile catalogue filter scroller missing');
 if(!catalogue.includes('data-family="Refills"')) throw new Error('dedicated USA refill filter missing');
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
