@@ -28,6 +28,10 @@ if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for ov
 if(!studio.includes("let order=['Body Butter','Face Balm','Hand & Foot Balm','Refills','Solid Perfume','Perfume Oil Roll-On','Glycerin Soap']")) throw new Error('intentional USA catalogue family order missing');
 if(!studio.includes('setActiveFilter(t)')) throw new Error('catalogue filter active-state UX missing');
 if(!studio.includes('Documentation pending')||!studio.includes('Pre-launch preview')) throw new Error('catalogue readiness labels missing');
+if(!studio.includes('dataset.cardImage')||!studio.includes('dataset.dialogImage')||!studio.includes('dataset.lightboxSrc')) throw new Error('product gallery thumbnail/lightbox interaction missing');
+if(!studio.includes("document.body.classList.add('cart-open')")||!studio.includes("t.id==='cart-backdrop'")) throw new Error('cart drawer body/backdrop interaction missing');
+if(!studio.includes("if(k==='special_instructions')continue")) throw new Error('browser customization allowlist missing');
+if(!studio.includes("Object.entries(x.options||{})")) throw new Error('cart must show selected customizations');
 if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.includes('image-lightbox')) throw new Error('gallery/lightbox UX missing');
 if(!fs.existsSync('assets/velvet-charms-usa-hero.jpg')) throw new Error('approved USA hero asset missing');
 if(!styles.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('approved USA hero is not wired into storefront CSS');
