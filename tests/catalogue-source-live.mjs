@@ -14,6 +14,11 @@ for (const family of requiredFamilies) if (!products.some(p => p.studio_family =
 if (products.some(p => ['face_cream','hand_foot_cream'].includes(p.id))) throw new Error('legacy water-cream SKU leaked into Studio');
 if (!products.every(p => p.id.startsWith('us_') && p.__source === 'studio' && p.__launch_status === 'prelaunch')) throw new Error('Studio V1 metadata contract broken');
 if (!products.every(p => Number.isFinite(Number(p.price)) && Number(p.price) > 0)) throw new Error('USA V1 product missing server price');
+if (products.length !== 17) throw new Error(`USA V1 product count changed unexpectedly: ${products.length}`);
+const expectedIds=['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_refill_body_butter_100','us_refill_face_balm_50','us_refill_hand_foot_balm_50','us_solid_perfume_vanilla_orchid','us_solid_perfume_amber_wood','us_solid_perfume_sandalwood_rose','us_solid_perfume_white_musk','us_rollon_lavender_mist','us_rollon_cedar_amber','us_rollon_floral_spice','us_soap_exfoliating','us_soap_herbal','us_soap_flower','us_soap_fruit'];
+for(const id of expectedIds) if(!products.some(p=>p.id===id)) throw new Error(`required USA V1 product missing: ${id}`);
+if(products.filter(p=>p.__fragrance_gate).length!==7) throw new Error('USA fragrance gate count changed');
+if(products.filter(p=>p.__supplier_formula_gate).length!==4) throw new Error('USA supplier-formula gate count changed');
 
 const serverMap = await studioCatalogue();
 if (serverMap.size !== products.length) throw new Error(`public/server counts diverge: public=${products.length}, server=${serverMap.size}`);
