@@ -5,7 +5,7 @@ const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio
 if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
 if(source.includes('a29437db52068129f0c5db9e7a6aa41de96fa929')) throw new Error('Art & Gifts must not feed USA Studio');
 if(!source.includes('STUDIO_CURRENCY="USD"')||!source.includes('STUDIO_MARKET="US"')) throw new Error('USA/USD contract missing');
-for(const id of ['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_solid_perfume_vanilla_orchid','us_rollon_lavender_mist','us_soap_exfoliating']) if(!defs.includes(id)) throw new Error(`USA V1 definition missing ${id}`);
+for(const id of ['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_refill_body_butter_100','us_refill_face_balm_50','us_refill_hand_foot_balm_50','us_solid_perfume_vanilla_orchid','us_rollon_lavender_mist','us_soap_exfoliating']) if(!defs.includes(id)) throw new Error(`USA V1 definition missing ${id}`);
 if(defs.includes('us_rollon_citrus_bloom')) throw new Error('Citrus Bloom must remain unfrozen until exact material review');
 if(!source.includes('PRODUCT_NOT_READY')) throw new Error('product readiness checkout gate missing');
 if(!source.includes('__fragrance_gate')||!source.includes('__supplier_formula_gate')) throw new Error('server must gate fragrance and supplier-formula products');
@@ -22,6 +22,7 @@ if(!createOrder.includes('validateCart')||!captureOrder.includes('validateCart')
 if(!/fingerprint\s*\(\s*items\s*,\s*date\s*\)/.test(captureOrder)) throw new Error('capture fingerprint validation missing');
 if(!/\^\(US\)/.test(captureOrder)||/RO\|INTL/.test(captureOrder)) throw new Error('capture metadata must be USA-only');
 if(!captureOrder.includes('STUDIO_CURRENCY')||captureOrder.includes('Paid product total: EUR')) throw new Error('capture seller handoff must use Studio USD currency');
+if(!catalogue.includes('data-family="Refills"')) throw new Error('dedicated USA refill filter missing');
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
 if(!studio.includes('setActiveFilter(t)')) throw new Error('catalogue filter active-state UX missing');
