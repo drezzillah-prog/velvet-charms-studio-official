@@ -27,6 +27,7 @@ if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) t
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
 if(!studio.includes("let order=['Body Butter','Face Balm','Hand & Foot Balm','Refills','Solid Perfume','Perfume Oil Roll-On','Glycerin Soap']")) throw new Error('intentional USA catalogue family order missing');
 if(!studio.includes('setActiveFilter(t)')) throw new Error('catalogue filter active-state UX missing');
+if(!studio.includes('Documentation pending')||!studio.includes('Pre-launch preview')) throw new Error('catalogue readiness labels missing');
 if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.includes('image-lightbox')) throw new Error('gallery/lightbox UX missing');
 if(!fs.existsSync('assets/velvet-charms-usa-hero.jpg')) throw new Error('approved USA hero asset missing');
 if(!styles.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('approved USA hero is not wired into storefront CSS');
