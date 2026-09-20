@@ -31,6 +31,9 @@ if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.i
 if(!fs.existsSync('assets/velvet-charms-usa-hero.jpg')) throw new Error('approved USA hero asset missing');
 if(!styles.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('approved USA hero is not wired into storefront CSS');
 if(!studio.includes('function money(p)') || !studio.includes('toFixed(2)')) throw new Error('browser USD price formatter missing');
+for(const [name,body] of [['index',fs.readFileSync('index.html','utf8')],['catalogue',catalogue],['faq',fs.readFileSync('faq.html','utf8')],['contact',fs.readFileSync('contact.html','utf8')],['legal',legal],['studio',studio]]){
+  if(/(?:^|[^A-Za-z])RON(?:[^A-Za-z]|$)/.test(body)||/(?:^|[^A-Za-z])EUR(?:[^A-Za-z]|$)/.test(body)||/€/.test(body)||/(?:^|[^A-Za-z])lei(?:[^A-Za-z]|$)/i.test(body)) throw new Error(`stale non-USD currency token in ${name}`);
+}
 if(!legal.includes('Studio USA uses USD')) throw new Error('USA currency disclosure missing');
 if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
 if(/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder+captureOrder)) throw new Error('PayPal secret hardcoded');
