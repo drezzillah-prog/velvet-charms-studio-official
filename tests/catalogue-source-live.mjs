@@ -43,3 +43,14 @@ if (gatedSoap) {
   if (!blockedSoap) throw new Error('supplier-dependent soap entered checkout');
 }
 console.log(`Velvet Charms Studio USA V1 catalogue PASS — ${serverMap.size} Studio-owned prelaunch products in USD`);
+
+
+// Every USA V1 image must resolve from the immutable pinned Body Glow asset source.
+for(const section of payload.sections){
+  for(const product of section.category.products||[]){
+    for(const file of product.images||[]){
+      const response=await fetch(section.assetBase+file.split('/').map(encodeURIComponent).join('/'),{method:'HEAD'});
+      if(!response.ok) throw new Error(`Missing pinned source image: ${product.id} -> ${file}`);
+    }
+  }
+}
