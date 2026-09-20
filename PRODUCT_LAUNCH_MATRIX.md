@@ -11,6 +11,13 @@ Studio USA is a separate U.S.-focused cosmetics storefront. Body Glow remains an
 
 The percentage formulas use a 100 g prototype/development batch basis. Retail fill and formula basis are intentionally separate fields.
 
+### Same-master-formula refills
+- Body Butter Refill — 100 ml; same VC-BB-001 master formula.
+- Nourishing Face Balm Refill — 50 ml; same VC-FB-001 master formula.
+- Hand & Foot Balm Refill — 50 ml; same VC-HFB-001 master formula.
+
+Refills reuse the original master formula; they do not introduce a new scent formula or a separate invented composition.
+
 ### Fragrance-gated
 - Solid Perfume: Vanilla Orchid, Amber Wood, Sandalwood Rose, White Musk — 50 ml.
 - Perfume Oil Roll-On: Lavender Mist, Cedar & Amber, Floral Spice — 10 ml.
