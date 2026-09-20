@@ -9,7 +9,7 @@ if (!payload.sections.length || payload.sections.some(s => s.source !== 'studio'
 
 const flatten = c => [...(c.products || []), ...(c.subcategories || []).flatMap(s => s.products || [])];
 const products = payload.sections.flatMap(s => flatten(s.category));
-const requiredFamilies = ['Body Butter','Face Balm','Hand & Foot Balm','Solid Perfume','Perfume Oil Roll-On','Glycerin Soap'];
+const requiredFamilies = ['Body Butter','Face Balm','Hand & Foot Balm','Refills','Solid Perfume','Perfume Oil Roll-On','Glycerin Soap'];
 for (const family of requiredFamilies) if (!products.some(p => p.studio_family === family)) throw new Error(`missing USA V1 family: ${family}`);
 if (products.some(p => ['face_cream','hand_foot_cream'].includes(p.id))) throw new Error('legacy water-cream SKU leaked into Studio');
 if (!products.every(p => p.id.startsWith('us_') && p.__source === 'studio' && p.__launch_status === 'prelaunch')) throw new Error('Studio V1 metadata contract broken');
