@@ -54,3 +54,4 @@ for(const token of ['Sea Glass Story Set','Black Sea Morning Set','Before Hello 
 for(const token of ['data-world="vows"','data-world="tides"','data-world="beginnings"','data-cross-sell="vows"','data-cross-sell="tides"','data-cross-sell="beginnings"']) if(!lifeHtml.includes(token)) throw new Error('Life Chapters commercial surface missing: '+token);
 if(/ron\/4\.05|premium=|country\(\)/.test(lifePricing)) throw new Error('Life Chapters must not regress to FX-derived pricing');
 if(!lifePricing.includes("From $")) throw new Error('USA Life Chapters USD pricing missing');
+console.log('Velvet Charms Life Chapters commercial contract PASS');
