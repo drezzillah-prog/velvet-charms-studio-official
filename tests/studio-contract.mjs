@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md'];
+const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js'];
 for(const file of requiredFiles) if(!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
 const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
 if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
@@ -46,3 +46,11 @@ if(!legal.includes('Studio USA uses USD')) throw new Error('USA currency disclos
 if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
 if(/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder+captureOrder)) throw new Error('PayPal secret hardcoded');
 console.log('Velvet Charms Studio USA V1 integrity contract PASS');
+
+const lifeHtml=fs.readFileSync('life-chapters.html','utf8'),lifePricing=fs.readFileSync('life-chapters-pricing.js','utf8'),vowsOffers=fs.readFileSync('data/velvet-vows-offers.js','utf8'),chapterOffers=fs.readFileSync('data/life-chapter-offers.js','utf8');
+for(const token of ['25','50','75','100','150','200']) if(!vowsOffers.includes(token)) throw new Error('Velvet Vows bulk tier missing: '+token);
+for(const token of ['The Ceremony Set','The Wedding Story Set','People We Love Set','Parents Keepsake Pair','After the Wedding Set']) if(!vowsOffers.includes(token)) throw new Error('Velvet Vows set missing: '+token);
+for(const token of ['Sea Glass Story Set','Black Sea Morning Set','Before Hello Set','First Home Story Set','Future You Heirloom Set']) if(!chapterOffers.includes(token)) throw new Error('Life Chapter commercial set missing: '+token);
+for(const token of ['data-world="vows"','data-world="tides"','data-world="beginnings"','data-cross-sell="vows"','data-cross-sell="tides"','data-cross-sell="beginnings"']) if(!lifeHtml.includes(token)) throw new Error('Life Chapters commercial surface missing: '+token);
+if(/ron\/4\.05|premium=|country\(\)/.test(lifePricing)) throw new Error('Life Chapters must not regress to FX-derived pricing');
+if(!lifePricing.includes("From $")) throw new Error('USA Life Chapters USD pricing missing');
