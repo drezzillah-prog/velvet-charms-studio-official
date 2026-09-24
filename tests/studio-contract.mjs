@@ -19,6 +19,7 @@ if(studio.includes('raw.githubusercontent.com')) throw new Error('browser bypass
 if(!publicApi.includes('publicCatalogue')||!publicApi.includes('marketFromRequest')) throw new Error('catalogue API routing missing');
 for(const endpoint of ['/api/store-status','/api/create-order','/api/capture-order']) if(!studio.includes(endpoint)) throw new Error(`client lost ${endpoint}`);
 if(!createOrder.includes('STORE_LIVE')||!createOrder.includes('market !== "US"')) throw new Error('launch/USA checkout gate missing');
+if(!captureOrder.includes('STORE_LIVE')) throw new Error('capture endpoint launch gate missing');
 if(!createOrder.includes('validateCart')||!captureOrder.includes('validateCart')) throw new Error('server cart validation missing');
 if(!/fingerprint\s*\(\s*items\s*,\s*date\s*\)/.test(captureOrder)) throw new Error('capture fingerprint validation missing');
 if(!/\^\(US\)/.test(captureOrder)||/RO\|INTL/.test(captureOrder)) throw new Error('capture metadata must be USA-only');
