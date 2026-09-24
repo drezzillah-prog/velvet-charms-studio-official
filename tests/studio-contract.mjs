@@ -1,49 +1,58 @@
 import fs from 'node:fs';
-
-const requiredFiles = [
-  'index.html','catalogue.html','faq.html','contact.html','legal.html','404.html',
-  'styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md',
-  'api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js',
-  'lib/catalogue-source.js','tests/catalogue-source-live.mjs'
-];
-for (const file of requiredFiles) {
-  if (!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
+const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js'];
+for(const file of requiredFiles) if(!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
+const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
+if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
+if(source.includes('a29437db52068129f0c5db9e7a6aa41de96fa929')) throw new Error('Art & Gifts must not feed USA Studio');
+if(!source.includes('STUDIO_CURRENCY="USD"')||!source.includes('STUDIO_MARKET="US"')) throw new Error('USA/USD contract missing');
+for(const token of ['body_butter_100:28','face_cream:32','hand_foot_cream:26','solid_perfume:32','perfume_rollon:22','soap_exfoliating:14','soap_flower:16']) if(!source.includes(token)) throw new Error('USA launch retail matrix regressed: '+token);
+for(const id of ['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_refill_body_butter_100','us_refill_face_balm_50','us_refill_hand_foot_balm_50','us_solid_perfume_vanilla_orchid','us_rollon_lavender_mist','us_soap_exfoliating']) if(!defs.includes(id)) throw new Error(`USA V1 definition missing ${id}`);
+if(defs.includes('us_rollon_citrus_bloom')) throw new Error('Citrus Bloom must remain unfrozen until exact material review');
+if(!source.includes('PRODUCT_NOT_READY')) throw new Error('product readiness checkout gate missing');
+if(!source.includes('__fragrance_gate')||!source.includes('__supplier_formula_gate')) throw new Error('server must gate fragrance and supplier-formula products');
+if(!studio.includes('__fragrance_gate')||!studio.includes('__supplier_formula_gate')) throw new Error('browser must visibly gate fragrance and supplier-formula products');
+if(!studio.includes('function gated(p)')) throw new Error('browser must centralize supplier/fragrance readiness gating');
+if(!studio.includes('state.cart=state.cart.filter')) throw new Error('browser must purge stale gated products from saved carts');
+if(!studio.includes('!gated(x.m.product)')) throw new Error('cart rendering must exclude supplier/fragrance-gated products');
+if(!studio.includes("fetch('/api/catalogue'")) throw new Error('browser catalogue must use Studio API');
+if(studio.includes('raw.githubusercontent.com')) throw new Error('browser bypasses authoritative API');
+if(!publicApi.includes('publicCatalogue')||!publicApi.includes('marketFromRequest')) throw new Error('catalogue API routing missing');
+for(const endpoint of ['/api/store-status','/api/create-order','/api/capture-order']) if(!studio.includes(endpoint)) throw new Error(`client lost ${endpoint}`);
+if(!createOrder.includes('STORE_LIVE')||!createOrder.includes('market !== "US"')) throw new Error('launch/USA checkout gate missing');
+if(!captureOrder.includes('STORE_LIVE')) throw new Error('capture endpoint launch gate missing');
+if(!createOrder.includes('validateCart')||!captureOrder.includes('validateCart')) throw new Error('server cart validation missing');
+if(!/fingerprint\s*\(\s*items\s*,\s*date\s*\)/.test(captureOrder)) throw new Error('capture fingerprint validation missing');
+if(!/\^\(US\)/.test(captureOrder)||/RO\|INTL/.test(captureOrder)) throw new Error('capture metadata must be USA-only');
+if(!captureOrder.includes('STUDIO_CURRENCY')||captureOrder.includes('Paid product total: EUR')) throw new Error('capture seller handoff must use Studio USD currency');
+if(!catalogue.includes('catalogue-key')||!styles.includes('.catalogue-summary')) throw new Error('catalogue readiness legend missing');
+if(!styles.includes('.filter-bar{flex-wrap:nowrap')&&!styles.includes('.filter-bar{flex-wrap:nowrap;')) throw new Error('mobile catalogue filter scroller missing');
+if(!catalogue.includes('data-family="Refills"')) throw new Error('dedicated USA refill filter missing');
+if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
+if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
+if(!studio.includes("let order=['Body Butter','Face Balm','Hand & Foot Balm','Refills','Solid Perfume','Perfume Oil Roll-On','Glycerin Soap']")) throw new Error('intentional USA catalogue family order missing');
+if(!studio.includes('setActiveFilter(t)')) throw new Error('catalogue filter active-state UX missing');
+if(!studio.includes('Documentation pending')||!studio.includes('Pre-launch preview')) throw new Error('catalogue readiness labels missing');
+if(!studio.includes('dataset.cardImage')||!studio.includes('dataset.dialogImage')||!studio.includes('dataset.lightboxSrc')) throw new Error('product gallery thumbnail/lightbox interaction missing');
+if(!studio.includes("document.body.classList.add('cart-open')")||!studio.includes("t.id==='cart-backdrop'")) throw new Error('cart drawer body/backdrop interaction missing');
+if(!studio.includes("if(k==='special_instructions')continue")) throw new Error('browser customization allowlist missing');
+if(!studio.includes("Object.entries(x.options||{})")) throw new Error('cart must show selected customizations');
+if(!studio.includes('card-thumbs')||!studio.includes('dialog-thumbs')||!studio.includes('image-lightbox')) throw new Error('gallery/lightbox UX missing');
+if(!fs.existsSync('assets/velvet-charms-usa-hero.jpg')) throw new Error('approved USA hero asset missing');
+if(!styles.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('approved USA hero is not wired into storefront CSS');
+if(!studio.includes('function money(p)') || !studio.includes('toFixed(2)')) throw new Error('browser USD price formatter missing');
+for(const [name,body] of [['index',fs.readFileSync('index.html','utf8')],['catalogue',catalogue],['faq',fs.readFileSync('faq.html','utf8')],['contact',fs.readFileSync('contact.html','utf8')],['legal',legal],['studio',studio]]){
+  if(/(?:^|[^A-Za-z])RON(?:[^A-Za-z]|$)/.test(body)||/(?:^|[^A-Za-z])EUR(?:[^A-Za-z]|$)/.test(body)||/€/.test(body)||/(?:^|[^A-Za-z])lei(?:[^A-Za-z]|$)/i.test(body)) throw new Error(`stale non-USD currency token in ${name}`);
 }
+if(!legal.includes('Studio USA uses USD')) throw new Error('USA currency disclosure missing');
+if(!legal.includes('STORE_LIVE=true')) throw new Error('prelaunch gate not documented');
+if(/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder+captureOrder)) throw new Error('PayPal secret hardcoded');
+console.log('Velvet Charms Studio USA V1 integrity contract PASS');
 
-const studio = fs.readFileSync('studio.js','utf8');
-const source = fs.readFileSync('lib/catalogue-source.js','utf8');
-const publicCatalogueApi = fs.readFileSync('api/catalogue.js','utf8');
-const createOrder = fs.readFileSync('api/create-order.js','utf8');
-const captureOrder = fs.readFileSync('api/capture-order.js','utf8');
-const catalogue = fs.readFileSync('catalogue.html','utf8');
-const legal = fs.readFileSync('legal.html','utf8');
-
-for (const sha of ['a29437db52068129f0c5db9e7a6aa41de96fa929','543bad871521bc1dace35cdf5d02b0f6aa2de279']) {
-  if (!source.includes(sha)) throw new Error(`server catalogue source is not pinned to immutable commit ${sha}`);
-}
-if (!studio.includes("fetch('/api/catalogue'")) throw new Error('browser catalogue is not routed through authoritative Studio API');
-if (studio.includes('raw.githubusercontent.com')) throw new Error('browser must not bypass authoritative Studio catalogue API');
-if (!publicCatalogueApi.includes('publicCatalogue') || !publicCatalogueApi.includes('marketFromRequest')) throw new Error('public catalogue API lost authoritative source/market routing');
-
-for (const banned of ['Body Care','Soaps','Perfumes']) {
-  if (source.includes(`BODY_SELLABLE_CATEGORY = "${banned}"`)) throw new Error(`cosmetic category accidentally allowlisted: ${banned}`);
-}
-for (const blockedId of ['epoxy_lamp','wall_clock_large']) {
-  if (!source.includes(blockedId)) throw new Error(`special-compliance product exclusion missing: ${blockedId}`);
-}
-if (!source.includes('ART_EXCLUDED_CATEGORIES = new Set(["Bundles"])')) throw new Error('unsafe mixed bundle exclusion missing');
-if (!source.includes('BODY_SELLABLE_CATEGORY = "Knitted & Braided Wool Creations"')) throw new Error('textile launch allowlist missing');
-if (!source.includes('BODY_PREVIEW_CATEGORY = "Candles"')) throw new Error('candle preview gate missing');
-
-for (const endpoint of ['/api/store-status','/api/create-order','/api/capture-order']) {
-  if (!studio.includes(endpoint)) throw new Error(`Studio client lost required endpoint ${endpoint}`);
-}
-if (!createOrder.includes('STORE_LIVE')) throw new Error('checkout launch gate missing');
-if (!createOrder.includes('validateCart') || !captureOrder.includes('validateCart')) throw new Error('server-side cart validation missing');
-if (!captureOrder.includes('fingerprint(items, date)')) throw new Error('capture cart fingerprint validation missing');
-if (!catalogue.includes('data-open-cart') || !catalogue.includes('checkout-btn')) throw new Error('cart/checkout UI missing');
-if (!studio.includes('card-thumbs') || !studio.includes('dialog-thumbs') || !studio.includes('image-lightbox')) throw new Error('product gallery/lightbox UX missing');
-if (!legal.includes('PFA legal name') || !legal.includes('STORE_LIVE=true')) throw new Error('prelaunch legal identity gate not documented');
-if (/PAYPAL_CLIENT_SECRET\s*=\s*["'][^"']+["']/.test(createOrder + captureOrder)) throw new Error('PayPal secret must never be hardcoded');
-
-console.log('Velvet Charms Studio integrity contract PASS');
+const lifeHtml=fs.readFileSync('life-chapters.html','utf8'),lifePricing=fs.readFileSync('life-chapters-pricing.js','utf8'),vowsOffers=fs.readFileSync('data/velvet-vows-offers.js','utf8'),chapterOffers=fs.readFileSync('data/life-chapter-offers.js','utf8');
+for(const token of ['25','50','75','100','150','200']) if(!vowsOffers.includes(token)) throw new Error('Velvet Vows bulk tier missing: '+token);
+for(const token of ['The Ceremony Set','The Wedding Story Set','People We Love Set','Parents Keepsake Pair','After the Wedding Set']) if(!vowsOffers.includes(token)) throw new Error('Velvet Vows set missing: '+token);
+for(const token of ['Sea Glass Story Set','Black Sea Morning Set','Before Hello Set','First Home Story Set','Future You Heirloom Set']) if(!chapterOffers.includes(token)) throw new Error('Life Chapter commercial set missing: '+token);
+for(const token of ['data-world="vows"','data-world="tides"','data-world="beginnings"','data-cross-sell="vows"','data-cross-sell="tides"','data-cross-sell="beginnings"']) if(!lifeHtml.includes(token)) throw new Error('Life Chapters commercial surface missing: '+token);
+if(/ron\/4\.05|premium=|country\(\)/.test(lifePricing)) throw new Error('Life Chapters must not regress to FX-derived pricing');
+if(!lifePricing.includes("From $")) throw new Error('USA Life Chapters USD pricing missing');
+console.log('Velvet Charms Life Chapters commercial contract PASS');

@@ -13,3 +13,26 @@
 @media(max-width:1000px){.site-header{flex-wrap:wrap}.site-header nav{order:3;width:100%}}
 @media(max-width:900px){.hero{grid-template-columns:1fr;gap:1.5rem}.hero-card{min-height:320px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dialog-wrap{grid-template-columns:1fr}.dialog-main-image{min-height:280px;max-height:420px}.split,.future-grid,.contact-grid{grid-template-columns:1fr}}
 @media(max-width:620px){.site-header{align-items:flex-start;gap:.7rem}.site-header nav{gap:.75rem}.hero{padding-top:3rem}.product-grid{grid-template-columns:1fr}.category-heading{align-items:flex-start;flex-direction:column}.product-actions{flex-direction:column}.customization-grid{grid-template-columns:1fr}.field-wide{grid-column:auto}footer{flex-direction:column}.brand{font-size:1.5rem}.cart-button{position:absolute;right:1rem;top:.8rem}.dialog-copy{padding:1.35rem}.image-lightbox{padding:1rem}.card-thumbs img{width:40px;height:40px}}
+
+
+/* USA homepage hero — approved visual */
+.hero{position:relative;isolation:isolate;margin-top:1.25rem;padding:clamp(3rem,7vw,6rem);min-height:76vh;border-radius:34px;overflow:hidden;background:url('assets/velvet-charms-usa-hero.jpg') center/cover no-repeat;box-shadow:0 28px 70px rgba(42,15,31,.18)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(24,8,18,.76) 0%,rgba(42,15,31,.56) 43%,rgba(42,15,31,.12) 76%,rgba(42,15,31,.08) 100%)}
+.hero-copy{max-width:720px;padding:2rem;border-radius:28px;background:rgba(34,14,26,.28);backdrop-filter:blur(2px)}
+.hero .eyebrow{color:#f0d58a}.hero h1{color:#fffaf6;text-shadow:0 2px 18px rgba(0,0,0,.28)}.hero .lead{color:#fff7f5;text-shadow:0 1px 12px rgba(0,0,0,.32)}
+.hero .btn.primary{background:#fffaf6;color:var(--plum);border-color:#fffaf6}.hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.75);background:rgba(42,15,31,.22)}
+.hero-card{background:rgba(42,15,31,.58);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.hero-card .velvet-orb{opacity:.35}
+@media(max-width:760px){.hero{padding:2rem 1.25rem;min-height:78vh;background-position:58% center}.hero::before{background:linear-gradient(180deg,rgba(24,8,18,.72),rgba(42,15,31,.48))}.hero-copy{padding:1.2rem}.hero-card{min-height:260px}}
+
+
+/* Keyboard and motion polish */
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media(max-width:620px){main{width:min(100% - 1.25rem,1220px)}.hero{border-radius:24px}.hero h1{font-size:clamp(2.8rem,15vw,4.6rem)}.hero-actions .btn{width:100%}.site-header nav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.25rem}.site-header nav a{white-space:nowrap}}
+
+/* USA V1 catalogue readiness labels */
+.availability-tag{display:inline-block;align-self:flex-start;margin:0 0 .45rem .35rem;padding:.3rem .52rem;border-radius:999px;font-size:.64rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}.availability-tag.preview{background:#edf4ed;color:#365a3c}.availability-tag.pending{background:#fff3d3;color:#785f16}
+
+/* Catalogue scanability */
+.catalogue-summary{display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap;margin:.25rem 0 1.8rem}.catalogue-key{display:flex;gap:1rem;flex-wrap:wrap;margin:0;color:var(--muted);font-size:.76rem}.catalogue-key span{display:inline-flex;align-items:center;gap:.4rem}.key-dot{width:.7rem;height:.7rem;border-radius:50%;display:inline-block}.preview-dot{background:#6f9a76}.pending-dot{background:#c8a442}.category-block{padding-top:.4rem}.category-block+.category-block{border-top:1px solid var(--line);padding-top:2.5rem}.product-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.product-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(42,15,31,.09);border-color:#dbc8d2}@media(max-width:620px){.catalogue-summary{align-items:flex-start}.catalogue-key{gap:.6rem 1rem}.filter-bar{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.45rem;scrollbar-width:thin}.filter{white-space:nowrap}}

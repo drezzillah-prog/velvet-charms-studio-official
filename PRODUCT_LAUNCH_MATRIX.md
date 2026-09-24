@@ -1,42 +1,70 @@
-# Velvet Charms Studio — Phase 1 launch matrix
+# Velvet Charms Studio USA — V1 launch matrix
 
-This repository is the only writable repository for the Studio launch project. The two existing storefront repositories are source references only and must remain untouched.
+Studio USA is a separate U.S.-focused cosmetics storefront. Body Glow remains an immutable source reference and Art & Gifts remains a separate EU storefront.
 
-## Sellable in Phase 1
+## V1 catalogue
 
-### Art & Gifts
-All products from the immutable Art & Gifts catalogue snapshot are eligible **except**:
-- the entire `Bundles` category, because current bundle recipes include candles and/or cosmetic products;
-- `epoxy_lamp`, because powered/electrical product conformity must be reviewed separately;
-- `wall_clock_large`, because the finished powered/electrical mechanism must be reviewed separately.
+### Controlled development formulas
+- Body Butter — 100 ml retail fill; formula code VC-BB-001.
+- Nourishing Face Balm — 50 ml retail fill; VC-FB-001.
+- Hand & Foot Balm — 50 ml retail fill; VC-HFB-001.
 
-The server-side checkout allowlist enforces these exclusions independently of the browser UI.
+The percentage formulas use a 100 g prototype/development batch basis. Retail fill and formula basis are intentionally separate fields.
 
-### Body Glow source
-Only the category `Knitted & Braided Wool Creations` is sellable in Phase 1.
+### Same-master-formula refills
+- Body Butter Refill — 100 ml; same VC-BB-001 master formula.
+- Nourishing Face Balm Refill — 50 ml; same VC-FB-001 master formula.
+- Hand & Foot Balm Refill — 50 ml; same VC-HFB-001 master formula.
 
-## Preview only
+Refills reuse the original master formula; they do not introduce a new scent formula or a separate invented composition.
 
-### Candles
-The category `Candles` is visible as a non-sale preview. Checkout is disabled until each intended launch formula has its formulation-specific CLP/safety-label review completed. Natural/essential-oil fragrance does not automatically remove CLP duties.
+### Fragrance-gated
+- Solid Perfume: Vanilla Orchid, Amber Wood, Sandalwood Rose, White Musk — 50 ml.
+- Perfume Oil Roll-On: Lavender Mist, Cedar & Amber, Floral Spice — 10 ml.
 
-## Not sold in Phase 1
+These remain server-blocked with `PRODUCT_NOT_READY` while supplier/fragrance documentation and applicable restrictions are unresolved.
 
-The Studio checkout does not allow Body Care, Soaps, Perfumes, cosmetic refills or bundles containing cosmetic products. These remain for the later dedicated Body Glow release after cosmetic compliance is completed.
+### Supplier-formula-gated
+- Exfoliating Glycerin Soap.
+- Natural Herbal Glycerin Soap.
+- Flower-Shaped Glycerin Soap.
+- Fruit-Shaped Glycerin Soap.
 
-## Launch gates
+No universal melt-and-pour percentages are invented. These remain server-blocked until the exact documented cosmetic-grade base and compatible additive levels are frozen.
 
-Public payment creation requires `STORE_LIVE=true` in the Studio Vercel project. Do not enable that variable until all of the following are complete:
-1. PFA legal operator details are inserted into `legal.html`.
-2. Official customer contact details are final.
-3. PayPal LIVE credentials are confirmed to belong to the intended business PayPal account.
-4. A controlled end-to-end payment test has succeeded.
-5. Shipping wording and process are confirmed.
-6. The product-safety/GPSR information to accompany the Phase 1 products is completed.
-7. Candle products remain non-sale unless their separate review is complete.
+### Outside frozen V1
+- Citrus Bloom roll-on: exact leave-on-suitable citrus materials and final percentages not frozen.
+- Water-based creams: Phase 2.
+- Candles: separate workstream.
+- Art, textiles, leather, epoxy/clay and EU bundles: Art & Gifts, not Studio USA.
 
-## Immutable source commits
-- Art & Gifts: `a29437db52068129f0c5db9e7a6aa41de96fa929`
-- Body Glow: `543bad871521bc1dace35cdf5d02b0f6aa2de279`
+## Checkout protections
 
-These sources are read-only. Studio writes must never target either original repository.
+- Currency: USD.
+- Market: United States only; non-US requests are rejected server-side.
+- `STORE_LIVE` must remain false/unset during prelaunch.
+- Product, quantity, customization and price are validated server-side.
+- PayPal order metadata contains the US market and a cart fingerprint.
+- Capture re-validates the cart and checks PayPal items, USD currency and total before capture.
+- The browser matches the PayPal return token to the saved checkout order before requesting capture.
+- No PayPal secret is stored in repository code.
+
+## External gates before public sale
+
+1. Establish the actual legal seller/operator information and publish the required customer-facing details.
+2. Finalize customer contact, U.S. shipping and return/refund terms.
+3. Verify LIVE PayPal credentials belong to the intended account.
+4. Complete a controlled end-to-end LIVE payment verification before opening public checkout.
+5. Freeze final commercial formulas and ingredient grades; retain supplier/lot documentation.
+6. Complete safety substantiation and final compliant labels for each product.
+7. Complete fragrance/material restriction review for fragrance-gated products.
+8. Complete supplier-base documentation for melt-and-pour soaps.
+9. Establish applicable manufacturing/batch records and adverse-event handling.
+10. Verify applicable U.S. cosmetic registration/listing requirements or exemptions for the actual operator/products.
+11. Only after the above gates pass, set `STORE_LIVE=true` in the correctly bound Studio USA Vercel project.
+
+The prelaunch site must not claim “FDA Approved” or make drug/treatment claims.
+
+## Immutable source reference
+
+Body Glow assets/source catalogue: `543bad871521bc1dace35cdf5d02b0f6aa2de279`. This reference does not authorize modifications to Body Glow.
