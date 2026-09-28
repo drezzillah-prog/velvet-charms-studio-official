@@ -10,8 +10,8 @@ Planning model — 22 Sep 2026. Replace estimates with invoices before final fin
 | Body Butter Refill | $22 | $7.5 | $14.5 | 66% |
 | Face Balm Refill | $25 | $8.0 | $17.0 | 68% |
 | Hand & Foot Balm Refill | $21 | $7.0 | $14.0 | 67% |
-| Solid Perfume 50 ml | $32 | $11.5 | $20.5 | 64% |
-| Perfume Oil Roll-On 10 ml | $22 | $7.0 | $15.0 | 68% |
+| Solid Perfume 0.35 oz / 10 g | $32 | $11.5 | $20.5 | 64% |
+| Velvet Perfume Oil Roll-On 0.34 fl oz / 10 mL planning anchor | $22 | $7.0 | $15.0 | 68% |
 | Exfoliating / Herbal Soap 100 g | $14 | $6.0 | $8.0 | 57% |
 | Flower / Fruit Soap 100 g | $16 | $6.5 | $9.5 | 59% |
 
@@ -24,3 +24,6 @@ Using about $25 blended contribution/order for a ~1.3–1.5 item basket:
 - 300 orders/month (~10/day): ~$7,500 (~34,425 RON)
 
 Scenarios, not sales forecasts. Fragrance/supplier-gated products remain technically blocked until their existing launch gates clear.
+
+
+Roll-on size variants are consolidated under one product card. The $22 line remains the 10 mL planning anchor; 5 mL and 15 mL size-specific pricing must be costed before checkout is enabled.\n
