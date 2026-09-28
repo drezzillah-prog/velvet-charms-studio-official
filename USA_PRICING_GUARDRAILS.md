@@ -40,8 +40,8 @@ The current USA retail matrix is a market-positioning proposal. It is NOT a clai
 | Body Butter Refill | $22 |
 | Nourishing Face Balm Refill | $25 |
 | Hand & Foot Balm Refill | $21 |
-| Solid Perfume 50 ml | $32 |
-| Perfume Oil Roll-On 10 ml | $22 |
+| Solid Perfume 0.35 oz / 10 g | $32 |
+| Velvet Perfume Oil Roll-On 0.34 fl oz / 10 mL planning anchor | $22 |
 | Exfoliating Glycerin Soap 100 g | $14 |
 | Herbal Glycerin Soap 100 g | $14 |
 | Flower-Shaped Glycerin Soap 100 g | $16 |
@@ -52,3 +52,6 @@ The current USA retail matrix is a market-positioning proposal. It is NOT a clai
 Before STORE_LIVE=true, replace every unknown cost with a real invoice/quote value and calculate profit per unit. If the resulting margin is below the business target, raise price, lower cost, change pack/size, or do not launch that SKU. Never silently reduce paid labor to make the margin appear viable.
 
 Fragrance-gated and supplier-formula-gated products remain blocked regardless of pricing status until their existing technical launch gates are cleared.
+
+
+The roll-on catalogue is intentionally consolidated into one configurable product. Final retail by 5 mL / 10 mL / 15 mL size must be margin-tested separately before STORE_LIVE.\n
