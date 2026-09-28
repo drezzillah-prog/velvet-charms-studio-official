@@ -5,16 +5,16 @@ Studio USA is a separate U.S.-focused cosmetics storefront. Body Glow remains an
 ## V1 catalogue
 
 ### Controlled development formulas
-- Body Butter — 100 ml retail fill; formula code VC-BB-001.
-- Nourishing Face Balm — 50 ml retail fill; VC-FB-001.
-- Hand & Foot Balm — 50 ml retail fill; VC-HFB-001.
+- Body Butter — 3.4 fl oz / 100 mL retail fill; formula code VC-BB-001.
+- Nourishing Face Balm — 1.7 fl oz / 50 mL retail fill; VC-FB-001.
+- Hand & Foot Balm — 1.7 fl oz / 50 mL retail fill; VC-HFB-001.
 
 The percentage formulas use a 100 g prototype/development batch basis. Retail fill and formula basis are intentionally separate fields.
 
 ### Same-master-formula refills
-- Body Butter Refill — 100 ml; same VC-BB-001 master formula.
-- Nourishing Face Balm Refill — 50 ml; same VC-FB-001 master formula.
-- Hand & Foot Balm Refill — 50 ml; same VC-HFB-001 master formula.
+- Body Butter Refill — 3.4 fl oz / 100 mL; same VC-BB-001 master formula.
+- Nourishing Face Balm Refill — 1.7 fl oz / 50 mL; same VC-FB-001 master formula.
+- Hand & Foot Balm Refill — 1.7 fl oz / 50 mL; same VC-HFB-001 master formula.
 
 Refills reuse the original master formula; they do not introduce a new scent formula or a separate invented composition.
 
