@@ -1,12 +1,12 @@
 import fs from 'node:fs';
-const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js','classics.html','classics.css','classics.js','scent.html','scent.js','data/velvet-classics.js'];
+const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js','classics.html','classics.css','classics.js','scent.html','scent.js','data/velvet-classics.js','studio-brand.css','assets/solid-perfume-ivory-hour.jpg','assets/solid-perfume-veiled.jpg','assets/solid-perfume-black-honey.jpg','assets/solid-perfume-sacred-smoke.jpg'];
 for(const file of requiredFiles) if(!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
 const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
 if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
 if(source.includes('a29437db52068129f0c5db9e7a6aa41de96fa929')) throw new Error('Art & Gifts must not feed USA Studio');
 if(!source.includes('STUDIO_CURRENCY="USD"')||!source.includes('STUDIO_MARKET="US"')) throw new Error('USA/USD contract missing');
 for(const token of ['body_butter_100:28','face_cream:32','hand_foot_cream:26','solid_perfume:32','perfume_rollon:22','soap_exfoliating:14','soap_flower:16']) if(!source.includes(token)) throw new Error('USA launch retail matrix regressed: '+token);
-for(const id of ['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_refill_body_butter_100','us_refill_face_balm_50','us_refill_hand_foot_balm_50','us_solid_perfume_vanilla_orchid','us_rollon_lavender_mist','us_soap_exfoliating']) if(!defs.includes(id)) throw new Error(`USA V1 definition missing ${id}`);
+for(const id of ['us_body_butter_100','us_face_balm_100','us_hand_foot_balm_100','us_refill_body_butter_100','us_refill_face_balm_50','us_refill_hand_foot_balm_50','us_solid_perfume_ivory_hour','us_solid_perfume_veiled','us_solid_perfume_black_honey','us_solid_perfume_sacred_smoke','us_perfume_oil_rollon','us_soap_exfoliating']) if(!defs.includes(id)) throw new Error(`USA V1 definition missing ${id}`);
 if(defs.includes('us_rollon_citrus_bloom')) throw new Error('Citrus Bloom must remain unfrozen until exact material review');
 if(!source.includes('PRODUCT_NOT_READY')) throw new Error('product readiness checkout gate missing');
 if(!source.includes('__fragrance_gate')||!source.includes('__supplier_formula_gate')) throw new Error('server must gate fragrance and supplier-formula products');
@@ -27,9 +27,13 @@ if(!captureOrder.includes('STUDIO_CURRENCY')||captureOrder.includes('Paid produc
 if(!catalogue.includes('catalogue-key')||!styles.includes('.catalogue-summary')) throw new Error('catalogue readiness legend missing');
 if(!styles.includes('.filter-bar{flex-wrap:nowrap')&&!styles.includes('.filter-bar{flex-wrap:nowrap;')) throw new Error('mobile catalogue filter scroller missing');
 if(!catalogue.includes('data-family="Refills"')) throw new Error('dedicated USA refill filter missing');
+if(!catalogue.includes('data-family="Velvet Fragrance"')) throw new Error('streamlined Velvet Fragrance filter missing');
+if(catalogue.includes('data-family="Perfume Oil Roll-On"')) throw new Error('obsolete separate roll-on category returned');
+if(!defs.includes('Net Wt. 0.35 oz / 10 g')) throw new Error('solid perfume must use weight-based USA units');
+for(const asset of ['solid-perfume-ivory-hour.jpg','solid-perfume-veiled.jpg','solid-perfume-black-honey.jpg','solid-perfume-sacred-smoke.jpg']) if(!defs.includes(asset)) throw new Error('signature solid perfume image mapping missing: '+asset);
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
-if(!studio.includes("let order=['Body Butter','Face Balm','Hand & Foot Balm','Refills','Solid Perfume','Perfume Oil Roll-On','Glycerin Soap']")) throw new Error('intentional USA catalogue family order missing');
+if(!studio.includes("let order=['Body Butter','Face Balm','Hand & Foot Balm','Refills','Velvet Fragrance','Glycerin Soap']")) throw new Error('intentional USA catalogue family order missing');
 if(!studio.includes('setActiveFilter(t)')) throw new Error('catalogue filter active-state UX missing');
 if(!studio.includes('Documentation pending')||!studio.includes('Pre-launch preview')) throw new Error('catalogue readiness labels missing');
 if(!studio.includes('dataset.cardImage')||!studio.includes('dataset.dialogImage')||!studio.includes('dataset.lightboxSrc')) throw new Error('product gallery thumbnail/lightbox interaction missing');
@@ -52,7 +56,7 @@ const lifeHtml=fs.readFileSync('life-chapters.html','utf8'),lifePricing=fs.readF
 for(const token of ['25','50','75','100','150','200']) if(!vowsOffers.includes(token)) throw new Error('Velvet Vows bulk tier missing: '+token);
 for(const token of ['The Ceremony Set','The Wedding Story Set','People We Love Set','Parents Keepsake Pair','After the Wedding Set']) if(!vowsOffers.includes(token)) throw new Error('Velvet Vows set missing: '+token);
 for(const token of ['Sea Glass Story Set','Black Sea Morning Set','Before Hello Set','First Home Story Set','Future You Heirloom Set']) if(!chapterOffers.includes(token)) throw new Error('Life Chapter commercial set missing: '+token);
-for(const token of ['data-world="vows"','data-world="tides"','data-world="beginnings"','data-cross-sell="vows"','data-cross-sell="tides"','data-cross-sell="beginnings"']) if(!lifeHtml.includes(token)) throw new Error('Life Chapters commercial surface missing: '+token);
+for(const token of ['data-world="vows"','data-world="tides"','data-world="beginnings"','data-cross-sell="vows"','data-cross-sell="tides"','data-cross-sell="beginnings"','Looking for custom wedding pieces, example photos, or a personalized quote?']) if(!lifeHtml.includes(token)) throw new Error('Life Chapters commercial surface missing: '+token);
 if(/ron\/4\.05|premium=|country\(\)/.test(lifePricing)) throw new Error('Life Chapters must not regress to FX-derived pricing');
 if(!lifePricing.includes("From $")) throw new Error('USA Life Chapters USD pricing missing');
 console.log('Velvet Charms Life Chapters commercial contract PASS');
@@ -64,3 +68,8 @@ if(!classics.includes('Skin samples are not offered until')) throw new Error('VE
 if(!classicsJs.includes("fetch('/api/contact'")||!classicsJs.includes('velvetClassicsPassportV1')) throw new Error('VELVET CLASSICS feedback/passport flow missing');
 if(!scentJs.includes("params.get('sample')")) throw new Error('QR sample-reference journey missing');
 for(const page of ['index.html','catalogue.html','life-chapters.html','faq.html','contact.html','legal.html']) if(!fs.readFileSync(page,'utf8').includes('classics.html')) throw new Error('VELVET CLASSICS navigation missing from '+page);
+
+const lifeJs=fs.readFileSync('life-chapters.js','utf8'),brandCss=fs.readFileSync('studio-brand.css','utf8');
+if(!lifeJs.includes('idea-description')||!lifeJs.includes('describeItem')) throw new Error('Life Chapters detailed product explanations missing');
+for(const token of ['--plum:#3b1230','--mauve:#7a3f68','--rose:#e2a9c4']) if(!brandCss.includes(token)) throw new Error('berry/rose Studio palette token missing: '+token);
+if(!studio.includes('product-size')) throw new Error('catalogue product sizing copy missing');
