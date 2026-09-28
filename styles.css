@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lora:wght@400;500;600;700&display=swap');
 
 :root{--plum:#2a0f1f;--mauve:#5c2a4a;--soft:#8e5c7a;--rose:#c78fb3;--gold:#c6a84a;--cream:#fbf6f8;--ink:#231820;--muted:#75646f;--line:#e8dce3;--card:#fffdfd;--success:#276749;--warning:#805b10}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fffafd 0%,#fbf6f8 100%);color:var(--ink);font-family:Inter,system-ui,sans-serif}body.cart-open{overflow:hidden}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
@@ -36,3 +36,147 @@
 
 /* Catalogue scanability */
 .catalogue-summary{display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap;margin:.25rem 0 1.8rem}.catalogue-key{display:flex;gap:1rem;flex-wrap:wrap;margin:0;color:var(--muted);font-size:.76rem}.catalogue-key span{display:inline-flex;align-items:center;gap:.4rem}.key-dot{width:.7rem;height:.7rem;border-radius:50%;display:inline-block}.preview-dot{background:#6f9a76}.pending-dot{background:#c8a442}.category-block{padding-top:.4rem}.category-block+.category-block{border-top:1px solid var(--line);padding-top:2.5rem}.product-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.product-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(42,15,31,.09);border-color:#dbc8d2}@media(max-width:620px){.catalogue-summary{align-items:flex-start}.catalogue-key{gap:.6rem 1rem}.filter-bar{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.45rem;scrollbar-width:thin}.filter{white-space:nowrap}}
+
+
+/* === RESTORE APPROVED VELVET USA VISUAL SYSTEM — 28 Sep 2026 === */
+html{color-scheme:only light!important;background:#fffaf6}
+body{
+  position:relative;
+  min-height:100vh;
+  background:#fffaf6!important;
+  color:var(--ink);
+  font-family:'Lora',Georgia,serif!important;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    linear-gradient(180deg,rgba(255,250,246,.76),rgba(251,242,247,.82)),
+    url('assets/velvet-charms-usa-hero.jpg') center/cover no-repeat;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(circle at 78% 8%,rgba(198,168,74,.12),transparent 26%),radial-gradient(circle at 10% 72%,rgba(199,143,179,.13),transparent 30%);
+}
+button,input,select,textarea{font-family:'Lora',Georgia,serif!important;color-scheme:only light}
+.site-header{
+  background:rgba(255,250,246,.96)!important;
+  border-bottom:1px solid rgba(92,42,74,.18)!important;
+  box-shadow:0 8px 28px rgba(42,15,31,.06);
+}
+.brand{font-family:'Cormorant Garamond',serif!important;color:var(--plum)!important;font-size:1.9rem}
+.brand span{color:var(--gold)!important}
+nav a{font-family:'Lora',Georgia,serif!important;color:var(--mauve)!important;font-weight:600}
+nav a[aria-current="page"]{color:var(--plum)!important;text-decoration-color:var(--gold)!important}
+.cart-button,.btn.primary,.buy-btn,.bulk-cta{background:var(--plum)!important;color:#fffaf6!important;border-color:var(--plum)!important}
+.btn.ghost,.details-btn{background:rgba(255,250,246,.78)!important;color:var(--plum)!important;border-color:rgba(92,42,74,.4)!important}
+.eyebrow{color:#9b7a22!important}
+.hero{
+  background:
+    linear-gradient(90deg,rgba(255,250,246,.84) 0%,rgba(255,250,246,.68) 48%,rgba(255,250,246,.18) 78%,rgba(255,250,246,.08) 100%),
+    url('assets/velvet-charms-usa-hero.jpg') center/cover no-repeat!important;
+  border:1px solid rgba(92,42,74,.16);
+  box-shadow:0 28px 70px rgba(42,15,31,.12)!important;
+}
+.hero::before{display:none!important}
+.hero-copy{
+  background:rgba(255,250,246,.80)!important;
+  border:1px solid rgba(92,42,74,.16);
+  box-shadow:0 16px 40px rgba(42,15,31,.08);
+  backdrop-filter:blur(6px)!important;
+}
+.hero h1{color:var(--plum)!important;text-shadow:none!important}
+.hero .lead{color:#4c3543!important;text-shadow:none!important}
+.hero .eyebrow{color:#9b7a22!important}
+.hero .btn.primary{background:var(--plum)!important;color:#fffaf6!important;border-color:var(--plum)!important}
+.hero .btn.ghost{background:rgba(255,250,246,.82)!important;color:var(--plum)!important;border-color:rgba(92,42,74,.38)!important}
+.hero-card{
+  background:rgba(255,250,246,.82)!important;
+  color:var(--plum)!important;
+  border:1px solid rgba(92,42,74,.18)!important;
+  box-shadow:0 20px 50px rgba(42,15,31,.10)!important;
+  backdrop-filter:blur(7px)!important;
+}
+.hero-card p{color:var(--mauve)!important;opacity:1!important}
+.hero-card strong{color:var(--plum)!important}
+.velvet-orb{opacity:.18!important}
+.split article,.future-grid article,.notice-card,.content-card,.life-world,.life-rule,.life-group,.bulk-vows,.vows-set-card,.chapter-set-card,.chapter-cross,.chapter-sets,.policy-status,.catalogue-intro,.product-card,.product-dialog,.cart-drawer,.cart-checkout{
+  background:rgba(255,250,246,.92)!important;
+  border-color:rgba(92,42,74,.16)!important;
+  box-shadow:0 14px 34px rgba(42,15,31,.06);
+  backdrop-filter:blur(8px);
+}
+.catalogue-page{padding-top:2.4rem}
+.catalogue-intro{
+  max-width:none!important;
+  padding:clamp(1.4rem,4vw,2.5rem);
+  border:1px solid rgba(92,42,74,.16);
+  border-radius:28px;
+  margin-bottom:1.4rem;
+}
+.catalogue-intro h1{color:var(--plum)!important}
+.catalogue-intro p,.category-note,.catalogue-status,.product-card p,.dialog-copy p,.content-card p,.content-card li{color:#65505d!important}
+.filter{background:rgba(255,250,246,.90)!important;color:var(--mauve)!important;border-color:rgba(92,42,74,.22)!important}
+.filter.active{background:var(--plum)!important;color:#fffaf6!important}
+.product-card{overflow:hidden!important}
+.card-media{background:linear-gradient(135deg,rgba(247,232,240,.94),rgba(255,250,246,.96))!important}
+.product-card h3,.category-heading h2,.dialog-copy h2,.page-hero h1,.content-card h2{font-family:'Cormorant Garamond',serif!important;color:var(--plum)!important}
+.price{color:var(--plum)!important}
+.page-hero{
+  padding:clamp(1.4rem,4vw,2.4rem);
+  border:1px solid rgba(92,42,74,.16);
+  border-radius:28px;
+  background:rgba(255,250,246,.90);
+  box-shadow:0 14px 34px rgba(42,15,31,.06);
+  backdrop-filter:blur(8px);
+}
+input,select,textarea{
+  background:#fffdfb!important;
+  color:var(--ink)!important;
+  border-color:rgba(92,42,74,.22)!important;
+}
+footer{background:rgba(255,250,246,.94)!important;border-top:1px solid rgba(92,42,74,.16)!important}
+@media(max-width:620px){
+  body::before{
+    background:
+      linear-gradient(180deg,rgba(255,250,246,.78),rgba(251,242,247,.84)),
+      url('assets/velvet-charms-usa-hero.jpg') 58% center/cover no-repeat;
+  }
+  .site-header{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:.8rem!important;
+    padding:.9rem 1rem!important;
+  }
+  .site-header .brand{display:block;max-width:100%;font-size:1.65rem!important}
+  .site-header .cart-button{
+    position:static!important;
+    width:100%!important;
+    order:2!important;
+    text-align:center;
+  }
+  .site-header nav{
+    order:3!important;
+    width:100%!important;
+    overflow:visible!important;
+    flex-wrap:wrap!important;
+    gap:.55rem .85rem!important;
+    padding-bottom:0!important;
+  }
+  .site-header nav a{font-size:.86rem!important}
+  .hero{
+    min-height:auto!important;
+    padding:1rem!important;
+    background:
+      linear-gradient(180deg,rgba(255,250,246,.76),rgba(255,250,246,.54)),
+      url('assets/velvet-charms-usa-hero.jpg') 58% center/cover no-repeat!important;
+  }
+  .hero-copy{padding:1.25rem!important}
+  .hero h1{font-size:clamp(2.8rem,13vw,4.3rem)!important}
+}
