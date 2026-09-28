@@ -2,22 +2,22 @@
 
 :root{
   color-scheme:light;
-  --plum:#2a0f1f;
-  --mauve:#6b3555;
-  --soft:#9a6a84;
-  --rose:#c78fb3;
-  --gold:#b8943f;
-  --ivory:#fffaf4;
-  --ivory-deep:#f8efe8;
-  --ink:#2c1a25;
-  --muted:#6f5966;
-  --line:#e9d8df;
-  --card:#fffdf9;
+  --plum:#3b1230;
+  --mauve:#7a3f68;
+  --soft:#ad7293;
+  --rose:#e2a9c4;
+  --gold:#c6a24d;
+  --ivory:#fff9fc;
+  --ivory-deep:#faeef6;
+  --ink:#2b1724;
+  --muted:#705766;
+  --line:#ead3df;
+  --card:#fffdfd;
 }
-html,body{background:#fffaf4!important;color:var(--ink)!important}
+html,body{background:#fff9fc!important;color:var(--ink)!important}
 body,button,input,select,textarea{font-family:'Jost',system-ui,sans-serif!important}
-body{background:linear-gradient(180deg,#fffaf4 0%,#fff7f1 52%,#fbf1ed 100%)!important}
-.site-header{background:rgba(255,250,244,.97)!important;border-bottom:1px solid #ead9df!important;box-shadow:0 8px 30px rgba(42,15,31,.04)}
+body{background:linear-gradient(180deg,#fff9fc 0%,#fff4fa 48%,#f8edf6 100%)!important}
+.site-header{background:rgba(255,249,252,.97)!important;border-bottom:1px solid #ead3df!important;box-shadow:0 8px 30px rgba(42,15,31,.04)}
 .brand{font-family:'Cormorant Garamond',serif!important;color:var(--plum)!important;font-size:1.9rem!important}
 .brand span{color:var(--gold)!important}
 nav a{color:var(--mauve)!important;font-family:'Jost',sans-serif!important;letter-spacing:.01em}
@@ -25,30 +25,30 @@ nav a[aria-current="page"]{color:var(--plum)!important}
 main{color:var(--ink)}
 .eyebrow{color:var(--gold)!important}
 .btn,.cart-button{font-family:'Jost',sans-serif!important}
-.btn.primary,.cart-button,.bulk-cta{background:var(--plum)!important;color:#fffaf4!important;border-color:var(--plum)!important}
-.btn.ghost{color:var(--plum)!important;border-color:var(--mauve)!important;background:rgba(255,250,244,.7)!important}
+.btn.primary,.cart-button,.bulk-cta{background:var(--plum)!important;color:#fff9fc!important;border-color:var(--plum)!important}
+.btn.ghost{color:var(--plum)!important;border-color:var(--mauve)!important;background:rgba(255,249,252,.76)!important}
 .hero{
   background:
-    linear-gradient(90deg,rgba(255,250,244,.96) 0%,rgba(255,250,244,.88) 34%,rgba(255,250,244,.42) 62%,rgba(255,250,244,.10) 100%),
+    linear-gradient(90deg,rgba(255,249,252,.97) 0%,rgba(253,239,247,.90) 35%,rgba(226,169,196,.38) 64%,rgba(59,18,48,.10) 100%),
     url('assets/velvet-charms-usa-hero.jpg') center/cover no-repeat!important;
-  border:1px solid #ead8de!important;
+  border:1px solid #e8cfdd!important;
   box-shadow:0 24px 58px rgba(76,36,57,.11)!important
 }
 .hero::before{display:none!important}
-.hero-copy{background:rgba(255,250,244,.78)!important;backdrop-filter:blur(3px)!important;border:1px solid rgba(255,255,255,.7)}
+.hero-copy{background:rgba(255,249,252,.83)!important;backdrop-filter:blur(3px)!important;border:1px solid rgba(255,255,255,.7)}
 .hero h1{color:var(--plum)!important;text-shadow:none!important}
-.hero .lead{color:#5f4855!important;text-shadow:none!important}
+.hero .lead{color:#62485a!important;text-shadow:none!important}
 .hero .eyebrow{color:var(--gold)!important}
-.hero .btn.primary{background:var(--plum)!important;color:#fffaf4!important;border-color:var(--plum)!important}
-.hero .btn.ghost{color:var(--plum)!important;border-color:var(--mauve)!important;background:rgba(255,250,244,.78)!important}
-.hero-card{background:rgba(255,250,244,.78)!important;color:var(--plum)!important;border:1px solid rgba(255,255,255,.76)!important;box-shadow:0 20px 44px rgba(42,15,31,.10)!important}
+.hero .btn.primary{background:var(--plum)!important;color:#fff9fc!important;border-color:var(--plum)!important}
+.hero .btn.ghost{color:var(--plum)!important;border-color:var(--mauve)!important;background:rgba(255,249,252,.83)!important}
+.hero-card{background:rgba(255,249,252,.83)!important;color:var(--plum)!important;border:1px solid rgba(255,255,255,.76)!important;box-shadow:0 20px 44px rgba(42,15,31,.10)!important}
 .hero-card p{color:var(--gold)!important}
 .hero-card strong{color:var(--plum)!important}
 .velvet-orb{opacity:.22!important}
 
 .split article,.future-grid article,.notice-card,.content-card,.product-card,.life-world,.life-group,.vows-set-card,.chapter-set-card,.bulk-vows,.chapter-cross,.quiz-result,.scent-quiz,.velvet-form,.process,.journal,.testing-circle,.passport>div:first-child,.passport-card,.note-arc article,.scent-next-grid a{
-  background:#fffdf9!important;
-  border-color:#ead8df!important;
+  background:#fffdfd!important;
+  border-color:#ead3df!important;
   color:var(--ink)!important
 }
 .split p,.notice-card p,.future p,.content-card p,.content-card li,.product-card p,.life-world>p,.life-group>p,.life-group li,.chapter-set-card p,.vows-set-card p,.bulk-vows>p,.chapter-cross p,.quiz-result p,.discovery p,.discovery li,.feedback p,.passport p,.testing-circle p,.process p,.journal p,.note-arc p,.scent-story{color:var(--muted)!important}
@@ -56,49 +56,49 @@ h1,h2,h3,h4,.brand,.product-card h3,.category-heading h2,.dialog-copy h2,.cart-h
   font-family:'Cormorant Garamond',serif!important
 }
 .price,.product-actions button,.filter,.availability-tag,.badge{font-family:'Jost',sans-serif!important}
-.card-media,.dialog-gallery{background:#f7eeea!important}
-.image-placeholder{background:linear-gradient(135deg,#fbf4ef,#f2e5e9)!important}
-.filter{background:#fffdf9!important;color:var(--mauve)!important;border-color:#dfcbd4!important}
-.filter.active{background:var(--plum)!important;color:#fffaf4!important;border-color:var(--plum)!important}
+.card-media,.dialog-gallery{background:#f8edf4!important}
+.image-placeholder{background:linear-gradient(135deg,#fff7fb,#f3e4ee)!important}
+.filter{background:#fffdfd!important;color:var(--mauve)!important;border-color:#dfcbd4!important}
+.filter.active{background:var(--plum)!important;color:#fff9fc!important;border-color:var(--plum)!important}
 .catalogue-intro,.page-hero,.life-hero,.classics-hero,.scent-detail{
   max-width:none!important;
   padding:clamp(1.8rem,5vw,4rem)!important;
   border:1px solid #ead8df!important;
   border-radius:30px!important;
   background:
-    linear-gradient(90deg,rgba(255,250,244,.97) 0%,rgba(255,250,244,.91) 42%,rgba(255,250,244,.56) 70%,rgba(255,250,244,.22) 100%),
+    linear-gradient(90deg,rgba(255,249,252,.98) 0%,rgba(252,237,246,.92) 42%,rgba(231,184,207,.58) 70%,rgba(88,29,68,.16) 100%),
     url('assets/velvet-charms-usa-hero.jpg') center/cover no-repeat!important;
   box-shadow:0 20px 48px rgba(42,15,31,.08)!important;
   text-align:left!important
 }
 .catalogue-intro h1,.page-hero h1,.life-hero h1,.classics-hero h1,.scent-detail h1{color:var(--plum)!important;text-shadow:none!important}
-.catalogue-intro p,.page-hero p,.life-hero>p,.classics-hero>p,.scent-detail .scent-story{color:#5f4855!important}
-.classics-hero .btn.primary{background:var(--plum)!important;color:#fffaf4!important;border-color:var(--plum)!important}
-.classics-hero .btn.ghost{color:var(--plum)!important;border-color:var(--mauve)!important;background:rgba(255,250,244,.78)!important}
-.classic-card{border-color:#ead8df!important;color:var(--ink)!important}
+.catalogue-intro p,.page-hero p,.life-hero>p,.classics-hero>p,.scent-detail .scent-story{color:#62485a!important}
+.classics-hero .btn.primary{background:var(--plum)!important;color:#fff9fc!important;border-color:var(--plum)!important}
+.classics-hero .btn.ghost{color:var(--plum)!important;border-color:var(--mauve)!important;background:rgba(255,249,252,.83)!important}
+.classic-card{border-color:#ead3df!important;color:var(--ink)!important}
 .classic-card:nth-child(1){background:linear-gradient(145deg,#fffdf8,#f8efd9)!important}
 .classic-card:nth-child(2){background:linear-gradient(145deg,#fffaf8,#f8ebf1)!important}
 .classic-card:nth-child(3){background:linear-gradient(145deg,#fff8f7,#f1e1e5)!important}
 .classic-card:nth-child(4){background:linear-gradient(145deg,#fffaf4,#eadde2)!important}
 .classic-card p{color:var(--muted)!important}
-.spectrum-track{background:#fffdf9!important;border-color:#ead8df!important}
-.spectrum-track a{border-color:#ead8df!important}
-.spectrum-track a:hover{background:#fbf0f4!important}
-.testing-placeholder{background:#fbf0f4!important;color:var(--mauve)!important}
-.policy-status,.payment-banner.warning{background:#fff6df!important;color:#70510d!important}
-.cart-drawer,.cart-checkout{background:#fffaf4!important}
-.catalogue-home{margin:1rem 0 5rem;padding:clamp(1.5rem,4vw,2.5rem);border:1px solid #ead8df;border-radius:28px;background:linear-gradient(145deg,#fffdf9,#fbf1ed)}
+.spectrum-track{background:#fffdfd!important;border-color:#ead3df!important}
+.spectrum-track a{border-color:#ead3df!important}
+.spectrum-track a:hover{background:#f9e9f2!important}
+.testing-placeholder{background:#f9e9f2!important;color:var(--mauve)!important}
+.policy-status,.payment-banner.warning{background:#fff3dd!important;color:#6d4f0c!important}
+.cart-drawer,.cart-checkout{background:#fff9fc!important}
+.catalogue-home{margin:1rem 0 5rem;padding:clamp(1.5rem,4vw,2.5rem);border:1px solid #ead8df;border-radius:28px;background:linear-gradient(145deg,#fffdfd,#f9eaf3)}
 .catalogue-home-head{display:flex;justify-content:space-between;gap:1rem;align-items:end;flex-wrap:wrap;margin-bottom:1.2rem}
 .catalogue-home h2{font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:clamp(2.5rem,5vw,4.3rem);line-height:1;margin:.2rem 0}
 .catalogue-home p{color:var(--muted);line-height:1.6}
 .catalogue-family-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
-.catalogue-family{padding:1.1rem 1.2rem;border:1px solid #ead8df;border-radius:18px;background:#fffdf9}
+.catalogue-family{padding:1.1rem 1.2rem;border:1px solid #ead8df;border-radius:18px;background:#fffdfd}
 .catalogue-family h3{font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:1.55rem;margin:0 0 .6rem}
 .catalogue-family ul{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
 .catalogue-family li{display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.91rem}
 .catalogue-family li strong{color:var(--plum);white-space:nowrap}
 .catalogue-family a{display:inline-block;margin-top:.9rem;color:var(--mauve);font-weight:700;text-decoration:underline}
-footer{background:#fffaf4!important;border-top-color:#ead8df!important;color:var(--muted)!important}
+footer{background:#fff9fc!important;border-top-color:#ead8df!important;color:var(--muted)!important}
 footer strong{color:var(--plum)!important}
 
 @media(max-width:760px){
@@ -108,17 +108,23 @@ footer strong{color:var(--plum)!important}
   .site-header nav{order:3!important;width:100%!important;overflow-x:auto!important;flex-wrap:nowrap!important;padding:.15rem 0 .35rem!important}
   .site-header nav a{white-space:nowrap!important}
   .hero{padding:1.15rem!important;min-height:auto!important;background:
-    linear-gradient(180deg,rgba(255,250,244,.93) 0%,rgba(255,250,244,.80) 48%,rgba(255,250,244,.20) 100%),
+    linear-gradient(180deg,rgba(255,249,252,.95) 0%,rgba(250,231,243,.83) 48%,rgba(117,52,91,.18) 100%),
     url('assets/velvet-charms-usa-hero.jpg') 62% center/cover no-repeat!important}
-  .hero-copy{padding:1.25rem!important;background:rgba(255,250,244,.82)!important}
+  .hero-copy{padding:1.25rem!important;background:rgba(255,249,252,.86)!important}
   .hero h1{font-size:clamp(3rem,14vw,4.8rem)!important}
-  .hero-card{min-height:210px!important;background:rgba(255,250,244,.70)!important}
+  .hero-card{min-height:210px!important;background:rgba(255,249,252,.76)!important}
   .catalogue-intro,.page-hero,.life-hero,.classics-hero,.scent-detail{
     padding:1.5rem!important;
     background:
-      linear-gradient(180deg,rgba(255,250,244,.95),rgba(255,250,244,.78)),
+      linear-gradient(180deg,rgba(255,249,252,.96),rgba(248,228,240,.84)),
       url('assets/velvet-charms-usa-hero.jpg') 62% center/cover no-repeat!important
   }
   .catalogue-family-grid{grid-template-columns:1fr}
   .catalogue-family li{align-items:flex-start}
 }
+.product-size{font-family:'Jost',sans-serif!important;font-size:.78rem!important;font-weight:700!important;letter-spacing:.025em;color:var(--mauve)!important;margin:.15rem 0 .5rem!important}
+.catalogue-mini-note{font-size:.75rem!important;color:var(--muted)!important;margin:.6rem 0 0!important}
+.life-custom-contact{margin:1rem 0 2rem;padding:1.2rem 1.35rem;border:1px solid #e3bfd2;border-radius:18px;background:linear-gradient(135deg,#fff8fc,#f8e6f1);box-shadow:0 12px 28px rgba(59,18,48,.05)}
+.life-custom-contact strong{display:block;font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:1.35rem;margin-bottom:.25rem}
+.life-custom-contact p{margin:.15rem 0 .75rem;color:var(--muted);line-height:1.6}
+.life-custom-contact a{display:inline-flex;padding:.68rem 1rem;border-radius:999px;background:var(--plum);color:#fff9fc;font-weight:700}
