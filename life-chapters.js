@@ -68,5 +68,36 @@ G('Beginnings Atelier','Custom work is scoped before price or production promise
 'New Family Story Commission','First Year Archive Commission','Adoption / Family Day Commission','Future Heirloom Commission','Custom Time Capsule','Family Archive Design','First Home Story Commission','Milestone Object — Request a Quote'])
 ]};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-for(const [world,groups] of Object.entries(worlds)){const root=document.querySelector('[data-world="'+world+'"]');if(!root)continue;root.innerHTML=groups.map(g=>'<article class="life-group"><h4>'+esc(g.title)+'</h4><p>'+esc(g.note)+'</p><ul class="idea-list">'+g.items.map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul></article>').join('');}
+function itemParts(raw){const parts=String(raw).split(/\s+[—–]\s+/);return{name:parts.shift().trim(),detail:parts.join(' — ').trim()};}
+function describeItem(raw,world,group){
+  const {name,detail}=itemParts(raw),n=name.toLowerCase();
+  if(detail){
+    if(/request a quote|case-by-case|only in|only pet-safe|subject to/i.test(detail))return detail.replace(/^./,c=>c.toUpperCase())+'.';
+    return 'A made-to-order '+name.toLowerCase()+' designed around '+detail.replace(/^[a-z]/,c=>c.toLowerCase()).replace(/[.]$/,'')+'.';
+  }
+  if(/consultation/.test(n))return 'A one-to-one scoping session to define the story, materials, quantity, personalization, production time and quotation before custom work begins.';
+  if(/service|commission|custom collection|custom .* set|full table story|archive design|story commission/.test(n))return 'A bespoke project scoped with you before production; concept, materials, dimensions, personalization, timeline and price are confirmed in a tailored quotation.';
+  if(/favors?|place cards?|name tokens?|table numbers?|napkin|menus?|program|save the date|thank-you cards?|invitation/.test(n))return 'A coordinated event detail that can be repeated across a guest count and adapted to the celebration palette, wording and level of personalization.';
+  if(/vow books?|journal|story book|booklet|writing set|recipe.*book|memory book/.test(n))return 'A keepsake for written memories, vows, letters or family stories, designed to remain useful after the original occasion rather than becoming disposable event stationery.';
+  if(/time capsule|archive|story box|memory box|keepsake box|letter box|waiting box|heirloom box|family wedding archive|box$/.test(n))return 'A structured keepsake container for preserving selected objects, notes, photographs or small evidence from a meaningful chapter, with the contents and internal layout defined with the customer.';
+  if(/tray|dish|bowl|coasters?|holder/.test(n))return 'A small functional object that also works as a keepsake, intended for rings, jewelry, keys or tabletop use depending on the design and chapter it belongs to.';
+  if(/frame|shadow box|display|wall piece|photo archive|pressed.*frame/.test(n))return 'A display piece for presenting a photograph, paper fragment, botanical element or meaningful object in a deliberate, home-ready format.';
+  if(/miniature|tiny .*cottage|tiny beach house|harbor|lighthouse$|broken pier/.test(n))return 'A small handcrafted scene or place-object that turns a location, memory or architectural reference into a displayable keepsake rather than a generic souvenir.';
+  if(/pendant|earrings?|jewelry|charm|keychain|bookmark|token|ornament|marker|tag/.test(n))return 'A small wearable, giftable or collectible keepsake that carries a place, person, date, phrase or symbolic detail without requiring a large display piece.';
+  if(/plaque|welcome sign|sign$/.test(n))return 'A personalized display piece for a ceremony, home or meaningful place, with wording, scale and finish confirmed before production.';
+  if(/portrait/.test(n))return 'A custom portrait-style keepsake developed from customer-supplied references and adapted to the visual language of the selected Velvet chapter.';
+  if(/preservation|bouquet|flowers?/.test(n))return 'A custom preservation-led keepsake intended to retain selected visual elements from flowers or event materials; feasibility and materials are assessed before acceptance.';
+  if(/first tooth|first lock|hospital|sock|shoes|handprint|footprint|growth ribbon/.test(n))return 'A compact milestone keepsake for preserving or displaying one of the small physical traces that are easy to lose as a child grows.';
+  if(/coordinates|where we|our first|place we|our city|our coast|map fragment|two places/.test(n))return 'A place-based keepsake that turns an address, coordinates, map reference or shared location into a discreet object tied to the customer’s own story.';
+  if(/soap/.test(n))return 'A small giftable cleansing favor concept that can be coordinated for an event only after the applicable product base, scent and documentation are cleared.';
+  if(/candle/.test(n))return 'A decorative favor concept reserved for a later compliant candle workstream; it is not treated as an immediately orderable Studio USA product.';
+  if(/pet|paw|dog|cat/.test(n))return 'A pet-centered keepsake designed around a supplied photo, name, date, coordinates or memory, with materials and attachment details chosen for the intended use.';
+  if(world==='vows')return 'A made-to-order wedding or celebration keepsake whose wording, color, materials and degree of personalization are confirmed before production.';
+  if(world==='tides')return 'A made-to-order coastal keepsake built around place, shoreline memory and restrained material references rather than souvenir-shop styling.';
+  return 'A made-to-order keepsake for a family, home, milestone or fresh start, personalized around the customer’s actual story rather than generic milestone wording.';
+}
+for(const [world,groups] of Object.entries(worlds)){
+  const root=document.querySelector('[data-world="'+world+'"]');if(!root)continue;
+  root.innerHTML=groups.map(g=>'<article class="life-group"><h4>'+esc(g.title)+'</h4><p>'+esc(g.note)+'</p><ul class="idea-list">'+g.items.map(i=>{const p=itemParts(i);return '<li><strong class="idea-name">'+esc(p.name)+'</strong><span class="idea-description">'+esc(describeItem(i,world,g.title))+'</span></li>';}).join('')+'</ul></article>').join('');
+}
 })();
