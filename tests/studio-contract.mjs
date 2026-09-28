@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js'];
+const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js','classics.html','classics.css','classics.js','scent.html','scent.js','data/velvet-classics.js'];
 for(const file of requiredFiles) if(!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
 const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
 if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
@@ -56,3 +56,11 @@ for(const token of ['data-world="vows"','data-world="tides"','data-world="beginn
 if(/ron\/4\.05|premium=|country\(\)/.test(lifePricing)) throw new Error('Life Chapters must not regress to FX-derived pricing');
 if(!lifePricing.includes("From $")) throw new Error('USA Life Chapters USD pricing missing');
 console.log('Velvet Charms Life Chapters commercial contract PASS');
+
+const classics=fs.readFileSync('classics.html','utf8'),classicsJs=fs.readFileSync('classics.js','utf8'),scentJs=fs.readFileSync('scent.js','utf8'),classicData=fs.readFileSync('data/velvet-classics.js','utf8');
+for(const token of ['IVORY HOUR','VEILED','BLACK HONEY','SACRED SMOKE']) if(!classicData.includes(token)) throw new Error('VELVET CLASSICS scent missing: '+token);
+for(const token of ['Find your Velvet','Discovery Experience','FROM BLOTTER TO BOTTLE','PASSPORT OF SCENTS','FIRST TESTING CIRCLE']) if(!classics.includes(token)) throw new Error('VELVET CLASSICS experience missing: '+token);
+if(!classics.includes('Skin samples are not offered until')) throw new Error('VELVET CLASSICS sample safety gate missing');
+if(!classicsJs.includes("fetch('/api/contact'")||!classicsJs.includes('velvetClassicsPassportV1')) throw new Error('VELVET CLASSICS feedback/passport flow missing');
+if(!scentJs.includes("params.get('sample')")) throw new Error('QR sample-reference journey missing');
+for(const page of ['index.html','catalogue.html','life-chapters.html','faq.html','contact.html','legal.html']) if(!fs.readFileSync(page,'utf8').includes('classics.html')) throw new Error('VELVET CLASSICS navigation missing from '+page);
