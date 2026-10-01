@@ -439,6 +439,13 @@
       saveCart();
     }
   });
+  document.addEventListener('error',e=>{
+    const img=e.target;
+    if(!(img instanceof HTMLImageElement)||img.dataset.fallbackApplied)return;
+    img.dataset.fallbackApplied='true';
+    img.src='assets/velvet-charms-usa-hero.jpg';
+    img.classList.add('product-image-fallback');
+  },true);
   document.addEventListener('keydown',e=>{
     if(e.key!=='Escape')return;
     closeCart();
