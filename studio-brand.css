@@ -136,3 +136,5 @@ footer strong{color:var(--plum)!important}
 .availability-tag.coming{background:#f6e9f1!important;color:#6f3158!important}
 .availability-tag.custom{background:#fff2cf!important;color:#72550b!important}
 .buy-btn.inquiry-btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+
+.availability-tag.made{background:#f3e7ef!important;color:#6f3158!important}
