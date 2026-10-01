@@ -102,8 +102,26 @@ function itemStatus(raw){
   if(/commission|consultation|custom |request a quote|preservation|200\+/.test(t)) return {label:'Custom quote',kind:'quote'};
   return {label:'Made to order',kind:'made'};
 }
+function slug(value){
+  return String(value).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
 for(const [world,groups] of Object.entries(worlds)){
   const root=document.querySelector('[data-world="'+world+'"]');if(!root)continue;
-  root.innerHTML=groups.map(g=>'<article class="life-group"><h4>'+esc(g.title)+'</h4><p>'+esc(g.note)+'</p><ul class="idea-list">'+g.items.map(i=>{const p=itemParts(i),st=itemStatus(i);return '<li><span class="idea-status '+st.kind+'">'+esc(st.label)+'</span><strong class="idea-name">'+esc(p.name)+'</strong><span class="idea-description">'+esc(describeItem(i,world,g.title))+'</span></li>';}).join('')+'</ul></article>').join('');
+  const nav='<nav class="life-subnav" aria-label="'+esc(world)+' subcategories"><span class="life-subnav-label">Explore</span><div class="life-subnav-links">'+groups.map((g,i)=>'<a href="#'+esc(world+'-'+slug(g.title))+'" data-life-subnav="'+esc(world)+'" '+(i===0?'class="active"':'')+'>'+esc(g.title)+'</a>').join('')+'</div></nav>';
+  const cards='<div class="life-group-grid">'+groups.map(g=>'<article class="life-group" id="'+esc(world+'-'+slug(g.title))+'" data-life-group="'+esc(world)+'"><h4>'+esc(g.title)+'</h4><p>'+esc(g.note)+'</p><ul class="idea-list">'+g.items.map(i=>{const p=itemParts(i),st=itemStatus(i);return '<li><span class="idea-status '+st.kind+'">'+esc(st.label)+'</span><strong class="idea-name">'+esc(p.name)+'</strong><span class="idea-description">'+esc(describeItem(i,world,g.title))+'</span></li>';}).join('')+'</ul></article>').join('')+'</div>';
+  root.innerHTML=nav+cards;
+}
+if('IntersectionObserver' in window){
+  const links=[...document.querySelectorAll('[data-life-subnav]')];
+  const byTarget=new Map(links.map(a=>[a.getAttribute('href')?.slice(1),a]));
+  const observer=new IntersectionObserver(entries=>{
+    const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+    if(!visible)return;
+    const active=byTarget.get(visible.target.id); if(!active)return;
+    const world=active.dataset.lifeSubnav;
+    document.querySelectorAll('[data-life-subnav="'+world+'"]').forEach(a=>a.classList.toggle('active',a===active));
+    active.scrollIntoView({block:'nearest',inline:'center'});
+  },{rootMargin:'-150px 0px -65% 0px',threshold:[0,.1]});
+  document.querySelectorAll('[data-life-group]').forEach(el=>observer.observe(el));
 }
 })();
