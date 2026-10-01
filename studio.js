@@ -3,7 +3,8 @@
 
   const CART_KEY='velvetStudioUsCartV3';
   const CHECKOUT_KEY='velvetStudioUsCheckoutV3';
-  const state={sections:[],meta:new Map(),family:'all',search:'',sort:'featured',cart:loadCart(),market:'US',status:{storeLive:false,paypalConfigured:false}};
+  const initialParams=new URLSearchParams(location.search);
+  const state={sections:[],meta:new Map(),family:initialParams.get('family')||'all',search:initialParams.get('q')||'',sort:initialParams.get('sort')||'featured',cart:loadCart(),market:'US',status:{storeLive:false,paypalConfigured:false}};
 
   const $=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -179,8 +180,15 @@
     const status=$('#catalogue-status');
     try{
       const r=await fetch('/api/catalogue',{cache:'no-store'});if(!r.ok)throw Error();
-      const payload=await r.json();register(payload);render();renderCart();
-      if(status)status.textContent=`${state.meta.size} pieces · USD`;
+      const payload=await r.json();register(payload);
+      const search=$('#catalogue-search'),sort=$('#catalogue-sort');
+      if(search)search.value=state.search;
+      if(sort&&[...sort.options].some(o=>o.value===state.sort))sort.value=state.sort;
+      const active=[...document.querySelectorAll('.filter')].find(b=>state.family==='all'?b.dataset.filter==='all':b.dataset.family===state.family);
+      if(active)setActiveFilter(active);else state.family='all';
+      render();renderCart();
+      const visible=[...state.meta.values()].filter(m=>(state.family==='all'||m.family===state.family)&&matchesSearch(m)).length;
+      if(status)status.textContent=`${visible} ${visible===1?'piece':'pieces'} · USD`;
     }catch{if(status)status.textContent="We couldn't load the collection. Please refresh the page or contact us."}
   }
   function checkoutCart(){return{items:state.cart.map(({key,qty,options})=>({key,qty,options})),requiredByDate:$('#required-by-date')?.value||''}}
