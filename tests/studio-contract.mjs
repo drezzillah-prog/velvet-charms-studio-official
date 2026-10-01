@@ -54,7 +54,7 @@ if(!read('index.html').includes('Things made to be kept, gifted and remembered.'
 if(!read('faq.html').includes('currently listed in the Studio are unscented')) throw new Error('unscented body-care customer explanation missing');
 if(!read('life-chapters.html').includes('Looking for custom wedding pieces, example photos, or a personalized quote?')) throw new Error('wedding example-photo / quote CTA missing');
 
-if(!studio.includes('64 pieces') && !studio.includes('state.meta.size')) throw new Error('catalogue customer count is not dynamic');
+if(!studio.includes('visibleCount')||!studio.includes('updateCatalogueStatus')) throw new Error('catalogue customer count is not dynamic');
 if(studio.includes('USA V1')||studio.includes('Documentation pending')||studio.includes('source-note')) throw new Error('internal catalogue language survived in browser UI');
 if(!studio.includes('Custom inquiry')||!studio.includes('Coming soon')||!studio.includes('Made to order')) throw new Error('customer-facing product statuses missing');
 if(!studio.includes('variantSummary')) throw new Error('visible fragrance size summary missing');
