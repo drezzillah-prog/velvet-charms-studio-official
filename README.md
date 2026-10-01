@@ -1,46 +1,97 @@
-# Velvet Charms Studio USA — official
+# Velvet Charms Studio USA — storefront architecture
 
-Separate USA-focused V1 cosmetics storefront for the Velvet Charms umbrella brand.
+This repository is the **only writable codebase for Velvet Charms Studio USA**.
 
-## Repository isolation
+## Non-negotiable isolation rule
 
-This repository owns the Studio USA implementation. `velvet-charms-body-glow-official` remains an immutable product-asset/source reference at commit `543bad871521bc1dace35cdf5d02b0f6aa2de279`. Art & Gifts is a separate EU storefront and is not part of Studio USA checkout.
+The original Velvet Charms websites are source references only and must not be modified by Studio work:
 
-## USA V1 scope
+- `drezzillah-prog/velvet-charms-body-glow-official`
+- `drezzillah-prog/velvet-charms-art-gifts-official`
 
-Planned families:
-- Body Butter — 100 ml retail fill; 100 g development formula basis.
-- Nourishing Face Balm — 50 ml retail fill; 100 g development formula basis.
-- Hand & Foot Balm — 50 ml retail fill; 100 g development formula basis.
-- Same-master-formula refills — Body Butter 100 ml, Nourishing Face Balm 50 ml, Hand & Foot Balm 50 ml.
-- Solid Perfume — 50 ml.
-- Perfume Oil Roll-On — 10 ml.
-- Glycerin/melt-and-pour soaps — 100 g source format where verified.
+Studio may read pinned catalogue/image snapshots from them. It must never delete, rename, rewrite, merge into or otherwise alter either original repository.
 
-Water-based creams and candles are outside V1. Citrus Bloom remains outside the frozen V1 definitions until exact leave-on-suitable materials and percentages are documented.
+## Non-negotiable catalogue rule
 
-The controlled formulas are development starting formulas, not automatic commercial clearance.
+**Do not collapse Studio USA back to a small body-care-only catalogue.**
 
-## Product gates
+The customer catalogue is the union of:
 
-Supplier-dependent soap products are rejected server-side until the exact documented melt-and-pour base and compatible additive levels are frozen. Fragrance-gated solid perfumes and roll-ons are also rejected server-side until their material/supplier documentation and applicable restrictions are cleared. `STORE_LIVE` is an additional global launch gate.
+1. the complete pinned Art & Gifts catalogue;
+2. the pinned Body Glow `Knitted & Braided Wool Creations` collection;
+3. the Studio-owned U.S. care/fragrance/soap subset;
+4. Life Chapters as the made-to-order commission universe.
 
-## Checkout architecture
+The current pinned source snapshots are:
 
-Studio USA has its own isolated PayPal flow. `/api/create-order.js` validates U.S. market eligibility, cart contents, quantities, options and server-side USD prices. `/api/capture-order.js` re-validates the cart, verifies the PayPal order metadata/fingerprint, items, currency and amount before capture. The client securely matches the PayPal return token to the checkout session before calling capture.
+- Art & Gifts: `a29437db52068129f0c5db9e7a6aa41de96fa929`
+- Body Glow: `543bad871521bc1dace35cdf5d02b0f6aa2de279`
 
-Checkout currency is USD and the server market is US only. No PayPal secret is stored in the repository.
+Art & Gifts bundles and the powered lamp/clock remain visible to the customer as **custom inquiry** pieces rather than entering standard checkout.
 
-Keep `STORE_LIVE` false or unset until the external launch gates are complete. LIVE variables when launch is authorized are `STORE_LIVE=true`, `PAYPAL_ENV=live`, `PAYPAL_CLIENT_ID`, and `PAYPAL_CLIENT_SECRET` (or `PAYPAL_SECRET`). Optional seller notification uses `FORMSPREE_ENDPOINT` or `FORMSPREE_FORM_ID`.
+## Studio-owned U.S. care subset
 
-## External launch gates
+Current care products:
 
-Before public checkout is enabled: establish and publish the actual legal seller/operator details required for the launch; finalize customer contact, shipping and return terms; verify the LIVE PayPal credentials belong to the intended account; complete a controlled end-to-end payment test; freeze final exact commercial formulas and supplier documentation; complete safety substantiation and final labels; establish the applicable U.S. manufacturing/recordkeeping and adverse-event process; and verify any applicable U.S. cosmetic registration/listing obligations or exemptions.
+- Body Butter — unscented;
+- Nourishing Face Balm — unscented;
+- Hand & Foot Balm — unscented;
+- same-formula refills — unscented;
+- Solid Perfume — IVORY HOUR, VEILED, BLACK HONEY, SACRED SMOKE;
+- selected glycerin soaps.
 
-Do not claim “FDA Approved” and do not use drug/treatment claims for V1 cosmetics.
+There is **no Perfume Oil Roll-On product in the Studio USA catalogue**.
 
-See `PRODUCT_LAUNCH_MATRIX.md`.
+Do not add a scent selector to the unscented body balms or their refills.
 
-## Integrity tests
+Solid perfume uses weight-based sizes:
 
-Run `npm test`. GitHub Actions runs the Studio Integrity contract on the working PR. The contract covers immutable source pins, USA/USD architecture, server-side market/product gates, PayPal return/capture integrity, `STORE_LIVE`, and absence of hardcoded PayPal secrets.
+- Net Wt. 0.18 oz / 5 g;
+- Net Wt. 0.35 oz / 10 g.
+
+## Public-copy rule
+
+Customer-facing pages must not expose internal project-management or deployment language such as:
+
+- “V1”;
+- “pre-launch” / “launch gates”;
+- `STORE_LIVE`;
+- “documentation pending”;
+- source-snapshot / source-pin explanations;
+- internal regulatory work notes.
+
+Customer-facing alternatives are simple statuses such as **Coming soon**, **Custom inquiry**, or **Online checkout is temporarily unavailable**.
+
+Technical gates remain server-side.
+
+## Checkout
+
+Studio USA uses USD and a U.S. market gate. Standard checkout uses PayPal when enabled.
+
+Server-side checkout must:
+
+- validate every product against the current Studio catalogue;
+- reject custom-inquiry / coming-soon products;
+- validate quantity and allowed options;
+- validate the U.S. market;
+- keep payment creation and capture behind the store-live gate;
+- never hardcode PayPal secrets.
+
+## Life Chapters
+
+Velvet Vows, Velvet Tides and Velvet Beginnings remain part of Studio USA. Large/custom catalogues should use:
+
+- clear customer-facing product descriptions;
+- `Made to order`, `Custom quote`, or similar customer statuses;
+- representative example photos rather than requiring unique imagery for every variation;
+- contact/quote CTAs for highly customized pieces.
+
+## Integrity
+
+Run:
+
+```bash
+npm test
+```
+
+Tests should protect the full-catalogue architecture, the source-repository isolation rule, unscented body-care options, the absence of roll-on perfume, customer-facing copy hygiene, server-side checkout gates and the approved Studio-owned solid-perfume images.
