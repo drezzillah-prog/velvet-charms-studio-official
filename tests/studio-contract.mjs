@@ -6,7 +6,7 @@ const required=[
   'data/us-v1-products.js','lib/catalogue-source.js','api/create-order.js','api/capture-order.js',
   'assets/velvet-charms-usa-hero.jpg',
   'assets/solid-perfume-ivory-hour.svg','assets/solid-perfume-veiled.svg',
-  'assets/solid-perfume-black-honey.svg','assets/solid-perfume-sacred-smoke.svg'
+  'assets/solid-perfume-black-honey.svg','assets/solid-perfume-sacred-smoke.svg','USA_IMPORTED_CATALOGUE_PRICING.md'
 ];
 for(const file of required) if(!fs.existsSync(file)) throw new Error('required Studio file missing: '+file);
 
@@ -72,3 +72,10 @@ if(!readme.includes('There is **no Perfume Oil Roll-On product')) throw new Erro
 if(!readme.includes('must not be modified by Studio work')) throw new Error('source-repository isolation rule missing');
 
 console.log('Velvet Charms Studio USA full-catalogue integrity contract PASS');
+const cataloguePage=read('catalogue.html');
+if(!cataloguePage.includes('id="catalogue-search"')) throw new Error('catalogue search control missing');
+if(!cataloguePage.includes('id="catalogue-sort"')) throw new Error('catalogue sort control missing');
+if(!studio.includes('matchesSearch')||!studio.includes('sortItems')) throw new Error('catalogue search/sort behavior missing');
+if(!source.includes('CATEGORY_INTRO')) throw new Error('curated category introductions missing');
+if(!source.includes('USA_PRICE_MISSING')) throw new Error('imported products can still fall back to non-USA prices');
+if(!read('USA_IMPORTED_CATALOGUE_PRICING.md').includes('does **not** convert the European list price mechanically into USD')) throw new Error('USA imported-pricing guardrail missing');
