@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
-    "test": "node tests/studio-contract.mjs && node tests/catalogue-source-live.mjs"
+    "test": "node --check studio.js && node --check home-featured.js && node --check classics.js && node --check scent.js && node --check life-chapters.js && node tests/studio-contract.mjs && node tests/catalogue-source-live.mjs"
   }
 }
