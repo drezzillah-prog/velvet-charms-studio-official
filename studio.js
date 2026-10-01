@@ -113,6 +113,21 @@
   function visibleCount(){
     return [...state.meta.values()].filter(matchesAll).length;
   }
+  function resetCatalogue(){
+    state.family='all';
+    state.shop='all';
+    state.search='';
+    state.sort='featured';
+    const search=$('#catalogue-search'),sort=$('#catalogue-sort');
+    if(search)search.value='';
+    if(sort)sort.value='featured';
+    const familyButton=document.querySelector('.filter[data-filter="all"]');
+    const shopButton=document.querySelector('[data-shop="all"]');
+    if(familyButton)setActiveFamily(familyButton);
+    if(shopButton)setActiveShop(shopButton);
+    render();
+    syncUrlState();
+  }
   function updateCatalogueStatus(){
     const status=$('#catalogue-status');
     if(!status)return;
@@ -210,7 +225,7 @@
   function render(){
     const root=$('#catalogue-root');
     if(!root)return;
-    root.innerHTML=state.sections.map(sectionMarkup).join('')||'<div class="no-results"><h2>No exact match yet.</h2><p>Try another search or clear one of the filters. For something very specific, you can also send us a custom request.</p><a class="btn primary" href="contact.html?subject=Custom%20Velvet%20Charms%20request">Ask about a custom piece</a></div>';
+    root.innerHTML=state.sections.map(sectionMarkup).join('')||'<div class="no-results"><h2>No exact match yet.</h2><p>Try another search or clear the filters. If you have something specific in mind, we can also discuss a custom piece.</p><div class="no-results-actions"><button class="btn ghost" type="button" data-reset-catalogue>Clear filters</button><a class="btn primary" href="contact.html?subject=Custom%20Velvet%20Charms%20request">Ask about a custom piece</a></div></div>';
     updateCatalogueStatus();
   }
 
@@ -235,6 +250,7 @@
         <p>${esc(p.description||'')}</p>
         ${variantSummary(p)}
         <p class="price">${money(p)}</p>
+        ${['made-to-order','custom-inquiry'].includes(p.availability)?`<p class="example-photo-note">Want another example before deciding? <a href="${esc('contact.html?subject='+encodeURIComponent('Example photos and quote for '+p.name))}">Ask for example photos or a personalized quote.</a></p>`:''}
         ${ordering&&!blocked?`<form id="customize-form" data-key="${esc(key)}">${optionFields(p)}<label class="field"><span>Quantity</span><input name="qty" type="number" min="1" max="20" value="1"></label><button class="btn primary full" type="submit">Add to bag</button></form>`:''}
         ${blocked?`<p><a class="btn primary" href="${esc(inquiryHref(p))}">${p.availability==='coming-soon'?'Ask to be notified':'Request details or a quote'}</a></p>`:''}
       </div>
@@ -397,7 +413,8 @@
   document.addEventListener('click',e=>{
     const t=e.target.closest('button,[data-open-image],[data-lightbox-src]');
     if(!t)return;
-    if(t.matches('[data-open-cart]'))openCart();
+    if(t.id==='catalogue-reset'||t.dataset.resetCatalogue!==undefined)resetCatalogue();
+    else if(t.matches('[data-open-cart]'))openCart();
     else if(t.matches('[data-close-cart]')||t.id==='cart-backdrop')closeCart();
     else if(t.dataset.details)openProduct(t.dataset.details,false);
     else if(t.dataset.order)openProduct(t.dataset.order,true);
