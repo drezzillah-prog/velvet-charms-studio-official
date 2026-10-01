@@ -9,7 +9,7 @@ G('Paper & Letters','A paper story rather than disconnected stationery.',[
 G('The Table','Table details that can become guest keepsakes or home objects.',[
 'Personalized Table Numbers','Name Tokens','Mini Trinket Dish Place Cards','Personalized Napkin Charms','Menu Holders','Centerpiece Keepsakes','Couple’s Table Piece','Story Table Numbers — places, years or moments from the relationship']),
 G('For the Guests','Small pieces with a reason to survive beyond the reception.',[
-'Mini Soap Favors','Mini Candle Favors — only after the candle compliance workstream is cleared','Personalized Charms','Mini Ceramic Tokens','Tiny Keepsake Boxes','Bookmarks','Message Tokens','Tiny Frames','Wedding Ornament','Mystery Favor — collectible designs distributed across the tables']),
+'Mini Soap Favors','Mini Candle Favors — planned for a future release','Personalized Charms','Mini Ceramic Tokens','Tiny Keepsake Boxes','Bookmarks','Message Tokens','Tiny Frames','Wedding Ornament','Mystery Favor — collectible designs distributed across the tables']),
 G('People We Love','Personal thank-you pieces, not generic bridal-party merchandise.',[
 'Bridesmaid Boxes','Groomsman Boxes','Maid of Honour Keepsake','Best Man Keepsake','Mother of the Bride / Groom Gift','Father of the Bride / Groom Gift','Grandparent Keepsake','Flower Girl Box','Ring Bearer Keepsake','Personalized Thank-You Object']),
 G('Remembering Someone','Quiet memorial pieces integrated without turning the celebration into memorial merchandise.',[
