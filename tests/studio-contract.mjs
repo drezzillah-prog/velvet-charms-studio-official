@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js','classics.html','classics.css','classics.js','scent.html','scent.js','data/velvet-classics.js','studio-brand.css','assets/solid-perfume-ivory-hour.jpg','assets/solid-perfume-veiled.jpg','assets/solid-perfume-black-honey.jpg','assets/solid-perfume-sacred-smoke.jpg'];
+const requiredFiles=['index.html','catalogue.html','faq.html','contact.html','legal.html','404.html','styles.css','studio.js','contact.js','package.json','vercel.json','PRODUCT_LAUNCH_MATRIX.md','data/us-v1-products.js','api/catalogue.js','api/create-order.js','api/capture-order.js','api/contact.js','api/store-status.js','api/health.js','lib/catalogue-source.js','tests/catalogue-source-live.mjs','USA_PRICING_GUARDRAILS.md','life-chapters.html','life-chapters.css','life-chapters.js','life-chapters-pricing.js','data/velvet-vows-offers.js','data/life-chapter-offers.js','velvet-vows-offers.js','life-chapter-offers.js','classics.html','classics.css','classics.js','scent.html','scent.js','data/velvet-classics.js','studio-brand.css','assets/solid-perfume-ivory-hour.svg','assets/solid-perfume-veiled.svg','assets/solid-perfume-black-honey.svg','assets/solid-perfume-sacred-smoke.svg'];
 for(const file of requiredFiles) if(!fs.existsSync(file)) throw new Error(`missing required file: ${file}`);
 const styles=fs.readFileSync('styles.css','utf8'),studio=fs.readFileSync('studio.js','utf8'),source=fs.readFileSync('lib/catalogue-source.js','utf8'),defs=fs.readFileSync('data/us-v1-products.js','utf8'),publicApi=fs.readFileSync('api/catalogue.js','utf8'),createOrder=fs.readFileSync('api/create-order.js','utf8'),captureOrder=fs.readFileSync('api/capture-order.js','utf8'),catalogue=fs.readFileSync('catalogue.html','utf8'),legal=fs.readFileSync('legal.html','utf8');
 if(!source.includes('543bad871521bc1dace35cdf5d02b0f6aa2de279')) throw new Error('Body Glow immutable source pin missing');
@@ -29,7 +29,7 @@ if(!styles.includes('.filter-bar{flex-wrap:nowrap')&&!styles.includes('.filter-b
 if(!catalogue.includes('data-family="Refills"')) throw new Error('dedicated USA refill filter missing');
 if(!catalogue.includes('data-family="Velvet Fragrance"')) throw new Error('streamlined Velvet Fragrance filter missing');
 if(catalogue.includes('data-family="Perfume Oil Roll-On"')) throw new Error('obsolete separate roll-on category returned');
-if(!defs.includes('Net Wt. 0.35 oz / 10 g')) throw new Error('solid perfume must use weight-based USA units');
+if(!defs.includes('Net Wt. 0.18 oz / 5 g')||!defs.includes('Net Wt. 0.35 oz / 10 g')) throw new Error('solid perfume must use weight-based USA size variants');
 for(const asset of ['solid-perfume-ivory-hour.jpg','solid-perfume-veiled.jpg','solid-perfume-black-honey.jpg','solid-perfume-sacred-smoke.jpg']) if(!defs.includes(asset)) throw new Error('signature solid perfume image mapping missing: '+asset);
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
@@ -73,3 +73,7 @@ const lifeJs=fs.readFileSync('life-chapters.js','utf8'),brandCss=fs.readFileSync
 if(!lifeJs.includes('idea-description')||!lifeJs.includes('describeItem')) throw new Error('Life Chapters detailed product explanations missing');
 for(const token of ['--plum:#3b1230','--mauve:#7a3f68','--rose:#e2a9c4']) if(!brandCss.includes(token)) throw new Error('berry/rose Studio palette token missing: '+token);
 if(!studio.includes('product-size')) throw new Error('catalogue product sizing copy missing');
+
+const contactJs=fs.readFileSync('contact.js','utf8');
+if(!contactJs.includes("get('subject')")) throw new Error('Life Chapters quote links must prefill contact enquiry');
+if(!lifeJs.includes('itemStatus')||!lifeJs.includes('Made to order')||!lifeJs.includes('Custom quote')) throw new Error('Life Chapters product status badges missing');
