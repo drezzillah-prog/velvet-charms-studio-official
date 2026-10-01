@@ -132,3 +132,7 @@ footer strong{color:var(--plum)!important}
 .variant-summary{margin:.65rem 0 0;padding:.7rem .8rem;border:1px solid #ead3df;border-radius:14px;background:#fff8fc}
 .variant-summary strong{display:block;font-family:'Jost',sans-serif!important;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
 .variant-summary span{display:block;color:var(--muted);font-size:.78rem;line-height:1.5}
+
+.availability-tag.coming{background:#f6e9f1!important;color:#6f3158!important}
+.availability-tag.custom{background:#fff2cf!important;color:#72550b!important}
+.buy-btn.inquiry-btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
