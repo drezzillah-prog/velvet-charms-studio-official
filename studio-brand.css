@@ -158,3 +158,57 @@ footer strong{color:var(--plum)!important}
 .product-card .product-body{display:flex;flex-direction:column}
 .product-card .product-actions{margin-top:auto}
 .product-card .price{margin-top:.85rem}
+
+.shop-by-strip{display:grid;grid-template-columns:minmax(190px,.55fr) minmax(0,1.45fr);gap:1rem;align-items:center;margin:1.35rem 0;padding:1.15rem 1.25rem;border:1px solid #e8cfdd;border-radius:22px;background:linear-gradient(135deg,#fffdfd,#f8e9f2);box-shadow:0 12px 30px rgba(59,18,48,.045)}
+.shop-by-copy .eyebrow{margin:0 0 .18rem}
+.shop-by-copy h2{font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:clamp(1.7rem,3vw,2.5rem);line-height:1;margin:0}
+.shop-by-chips{display:flex;flex-wrap:wrap;gap:.52rem;justify-content:flex-end}
+.shop-chip{appearance:none;border:1px solid #dfc7d4;border-radius:999px;background:#fffdfd;color:var(--mauve);padding:.62rem .82rem;font:700 .73rem/1 'Jost',sans-serif;letter-spacing:.025em;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
+.shop-chip:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(59,18,48,.08)}
+.shop-chip.active{background:var(--plum);border-color:var(--plum);color:#fff9fc}
+.product-meta-row{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.product-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.product-card:hover{transform:translateY(-3px);border-color:#dcb8cb!important;box-shadow:0 20px 38px rgba(59,18,48,.10)}
+.product-card .card-main-image{transition:transform .35s ease}
+.product-card:hover .card-main-image{transform:scale(1.018)}
+.product-actions{gap:.55rem!important}
+.product-actions .details-btn,.product-actions .buy-btn{min-height:42px;border-radius:999px!important}
+.no-results{padding:2rem;border:1px dashed #dcb8cb;border-radius:22px;background:#fffdfd;text-align:center}
+.no-results h2{font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:2rem;margin:.1rem 0 .5rem}
+.no-results p{max-width:620px;margin:.2rem auto 1rem;color:var(--muted);line-height:1.65}
+
+.featured-studio{margin:1rem 0 5rem;padding:clamp(1.4rem,4vw,2.4rem);border:1px solid #e8cfdd;border-radius:28px;background:linear-gradient(145deg,#fffdfd,#f7e7f1)}
+.featured-studio-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.featured-studio-head h2{font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:clamp(2.2rem,5vw,4rem);line-height:.95;margin:.2rem 0}
+.featured-studio-head p{max-width:690px;color:var(--muted);line-height:1.6}
+.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem}
+.featured-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #ead3df;border-radius:20px;background:#fffdfd;min-height:100%}
+.featured-card-media{aspect-ratio:4/3;overflow:hidden;background:#f8edf4}
+.featured-card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.featured-card:hover .featured-card-media img{transform:scale(1.025)}
+.featured-card-copy{display:flex;flex-direction:column;flex:1;padding:1rem}
+.featured-card-copy .eyebrow{font-size:.62rem}
+.featured-card-copy h3{font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:1.55rem;line-height:1.05;margin:.25rem 0 .45rem}
+.featured-card-copy p{color:var(--muted);font-size:.84rem;line-height:1.5;margin:.1rem 0 .8rem}
+.featured-card-copy a{margin-top:auto;color:var(--mauve);font-weight:800;text-decoration:underline}
+.featured-price{font:800 .9rem/1 'Jost',sans-serif;color:var(--plum);margin-bottom:.8rem}
+
+.occasion-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin:1rem 0 5rem}
+.occasion-card{display:block;padding:1.25rem;border:1px solid #ead3df;border-radius:20px;background:#fffdfd;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
+.occasion-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(59,18,48,.08)}
+.occasion-card span{display:block;color:var(--gold);font:800 .66rem/1 'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.occasion-card strong{display:block;margin:.42rem 0 .35rem;font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:1.55rem}
+.occasion-card p{margin:0;color:var(--muted);font-size:.83rem;line-height:1.5}
+
+@media(max-width:900px){
+  .featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .occasion-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .shop-by-strip{grid-template-columns:1fr}
+  .shop-by-chips{justify-content:flex-start}
+}
+@media(max-width:620px){
+  .featured-grid,.occasion-grid{grid-template-columns:1fr}
+  .shop-by-strip{padding:1rem}
+  .shop-by-chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.2rem}
+  .shop-chip{white-space:nowrap}
+}
