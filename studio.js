@@ -14,11 +14,11 @@
   function productsOf(c){return [...(c.products||[]).map(p=>({product:p,subcategory:''})),...(c.subcategories||[]).flatMap(s=>(s.products||[]).map(p=>({product:p,subcategory:s.name||''})))]}
   function image(meta,path){const v=String(path||'');if(v.startsWith('/')||/^https?:\/\//i.test(v))return v;return meta.assetBase+v.split('/').map(encodeURIComponent).join('/')}
   function money(p){const amount='
-  function unavailable(p){return !!(p?.__inquiry_only||p?.__supplier_formula_gate||p?.__fragrance_gate)}
+  function unavailable(p){return ['custom-inquiry','coming-soon'].includes(p?.availability)}
   function availabilityLabel(p){
-    if(p?.__fragrance_gate||p?.__supplier_formula_gate)return {text:'Coming soon',kind:'coming'};
-    if(p?.__inquiry_only)return {text:'Custom inquiry',kind:'custom'};
-    if(p?.__made_to_order)return {text:'Made to order',kind:'made'};
+    if(p?.availability==='coming-soon')return {text:'Coming soon',kind:'coming'};
+    if(p?.availability==='custom-inquiry')return {text:'Custom inquiry',kind:'custom'};
+    if(p?.availability==='made-to-order')return {text:'Made to order',kind:'made'};
     return null;
   }
   function customerFamily(p,section){return p.studio_family||section.category?.name||''}
@@ -89,7 +89,7 @@
         <div class="product-actions">
           <button class="details-btn" type="button" data-details="${esc(meta.key)}">Details</button>
           ${unavailable(p)
-            ? `<a class="buy-btn inquiry-btn" href="${esc(inquiryHref(p))}">${p.__fragrance_gate||p.__supplier_formula_gate?'Ask to be notified':'Ask about this piece'}</a>`
+            ? `<a class="buy-btn inquiry-btn" href="${esc(inquiryHref(p))}">${p.availability==='coming-soon'?'Ask to be notified':'Ask about this piece'}</a>`
             : `<button class="buy-btn" type="button" data-order="${esc(meta.key)}">Choose options</button>`}
         </div>
       </div>
@@ -136,7 +136,7 @@
         ${variantSummary(p)}
         <p class="price">${money(p)}</p>
         ${ordering&&!blocked?`<form id="customize-form" data-key="${esc(key)}">${optionFields(p)}<label class="field"><span>Quantity</span><input name="qty" type="number" min="1" max="20" value="1"></label><button class="btn primary full" type="submit">Add to bag</button></form>`:''}
-        ${blocked?`<p><a class="btn primary" href="${esc(inquiryHref(p))}">${p.__fragrance_gate||p.__supplier_formula_gate?'Ask to be notified':'Request details or a quote'}</a></p>`:''}
+        ${blocked?`<p><a class="btn primary" href="${esc(inquiryHref(p))}">${p.availability==='coming-soon'?'Ask to be notified':'Request details or a quote'}</a></p>`:''}
       </div>
     </div>`;
     if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');
@@ -324,7 +324,7 @@
         <div class="product-actions">
           <button class="details-btn" type="button" data-details="${esc(meta.key)}">Details</button>
           ${unavailable(p)
-            ? `<a class="buy-btn inquiry-btn" href="${esc(inquiryHref(p))}">${p.__fragrance_gate||p.__supplier_formula_gate?'Ask to be notified':'Ask about this piece'}</a>`
+            ? `<a class="buy-btn inquiry-btn" href="${esc(inquiryHref(p))}">${p.availability==='coming-soon'?'Ask to be notified':'Ask about this piece'}</a>`
             : `<button class="buy-btn" type="button" data-order="${esc(meta.key)}">Choose options</button>`}
         </div>
       </div>
@@ -371,7 +371,7 @@
         ${variantSummary(p)}
         <p class="price">${money(p)}</p>
         ${ordering&&!blocked?`<form id="customize-form" data-key="${esc(key)}">${optionFields(p)}<label class="field"><span>Quantity</span><input name="qty" type="number" min="1" max="20" value="1"></label><button class="btn primary full" type="submit">Add to bag</button></form>`:''}
-        ${blocked?`<p><a class="btn primary" href="${esc(inquiryHref(p))}">${p.__fragrance_gate||p.__supplier_formula_gate?'Ask to be notified':'Request details or a quote'}</a></p>`:''}
+        ${blocked?`<p><a class="btn primary" href="${esc(inquiryHref(p))}">${p.availability==='coming-soon'?'Ask to be notified':'Request details or a quote'}</a></p>`:''}
       </div>
     </div>`;
     if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');
