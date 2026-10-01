@@ -30,7 +30,7 @@ if(!catalogue.includes('data-family="Refills"')) throw new Error('dedicated USA 
 if(!catalogue.includes('data-family="Velvet Fragrance"')) throw new Error('streamlined Velvet Fragrance filter missing');
 if(catalogue.includes('data-family="Perfume Oil Roll-On"')) throw new Error('obsolete separate roll-on category returned');
 if(!defs.includes('Net Wt. 0.18 oz / 5 g')||!defs.includes('Net Wt. 0.35 oz / 10 g')) throw new Error('solid perfume must use weight-based USA size variants');
-for(const asset of ['solid-perfume-ivory-hour.jpg','solid-perfume-veiled.jpg','solid-perfume-black-honey.jpg','solid-perfume-sacred-smoke.jpg']) if(!defs.includes(asset)) throw new Error('signature solid perfume image mapping missing: '+asset);
+for(const asset of ['solid-perfume-ivory-hour.svg','solid-perfume-veiled.svg','solid-perfume-black-honey.svg','solid-perfume-sacred-smoke.svg']) if(!defs.includes(asset)) throw new Error('signature solid perfume image mapping missing: '+asset);
 if(!catalogue.includes('data-open-cart')||!catalogue.includes('checkout-btn')) throw new Error('cart UI missing');
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling for overlays missing');
 if(!studio.includes("let order=['Body Butter','Face Balm','Hand & Foot Balm','Refills','Velvet Fragrance','Glycerin Soap']")) throw new Error('intentional USA catalogue family order missing');
