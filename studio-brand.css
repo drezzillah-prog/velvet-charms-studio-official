@@ -212,3 +212,5 @@ footer strong{color:var(--plum)!important}
   .shop-by-chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.2rem}
   .shop-chip{white-space:nowrap}
 }
+
+.product-image-fallback{object-fit:cover!important;filter:saturate(.8) contrast(.96);opacity:.88}
