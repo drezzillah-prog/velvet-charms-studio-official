@@ -96,8 +96,14 @@ function describeItem(raw,world,group){
   if(world==='tides')return 'A made-to-order coastal keepsake built around place, shoreline memory and restrained material references rather than souvenir-shop styling.';
   return 'A made-to-order keepsake for a family, home, milestone or fresh start, personalized around the customer’s actual story rather than generic milestone wording.';
 }
+function itemStatus(raw){
+  const t=String(raw).toLowerCase();
+  if(/candle|soap favor/.test(t)) return {label:'Safety-gated concept',kind:'gated'};
+  if(/commission|consultation|custom |request a quote|preservation|200\+/.test(t)) return {label:'Custom quote',kind:'quote'};
+  return {label:'Made to order',kind:'made'};
+}
 for(const [world,groups] of Object.entries(worlds)){
   const root=document.querySelector('[data-world="'+world+'"]');if(!root)continue;
-  root.innerHTML=groups.map(g=>'<article class="life-group"><h4>'+esc(g.title)+'</h4><p>'+esc(g.note)+'</p><ul class="idea-list">'+g.items.map(i=>{const p=itemParts(i);return '<li><strong class="idea-name">'+esc(p.name)+'</strong><span class="idea-description">'+esc(describeItem(i,world,g.title))+'</span></li>';}).join('')+'</ul></article>').join('');
+  root.innerHTML=groups.map(g=>'<article class="life-group"><h4>'+esc(g.title)+'</h4><p>'+esc(g.note)+'</p><ul class="idea-list">'+g.items.map(i=>{const p=itemParts(i),st=itemStatus(i);return '<li><span class="idea-status '+st.kind+'">'+esc(st.label)+'</span><strong class="idea-name">'+esc(p.name)+'</strong><span class="idea-description">'+esc(describeItem(i,world,g.title))+'</span></li>';}).join('')+'</ul></article>').join('');
 }
 })();
