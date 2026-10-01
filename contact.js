@@ -4,6 +4,8 @@
     const form = document.getElementById('contact-form');
     const status = document.getElementById('contact-status');
     if (!form || !status) return;
+    const subject = new URLSearchParams(location.search).get('subject');
+    if (subject && form.elements.message && !form.elements.message.value) form.elements.message.value = subject + '\n\n';
     form.addEventListener('submit', async event => {
       event.preventDefault();
       const button = form.querySelector('button[type="submit"]');
