@@ -18,6 +18,7 @@
   function availabilityLabel(p){
     if(p?.__fragrance_gate||p?.__supplier_formula_gate)return {text:'Coming soon',kind:'coming'};
     if(p?.__inquiry_only)return {text:'Custom inquiry',kind:'custom'};
+    if(p?.__made_to_order)return {text:'Made to order',kind:'made'};
     return null;
   }
   function customerFamily(p,section){return p.studio_family||section.category?.name||''}
