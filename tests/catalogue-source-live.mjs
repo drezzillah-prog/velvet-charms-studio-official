@@ -18,6 +18,7 @@ for(const p of products){
     if(key in p) throw new Error('formula metadata leaked publicly: '+p.id+' -> '+key);
   }
   if(!['standard','made-to-order','custom-inquiry','coming-soon'].includes(p.availability)) throw new Error('invalid customer availability state: '+p.id);
+  if(!Array.isArray(p.tags)||!p.tags.length) throw new Error('shopping tags missing: '+p.id);
 }
 
 for(const category of ['Paintings & Portraits','Hair Accessories','Epoxy & Clay Creations','Leather Bags','Wall Clock','Bundles','Textiles & Comfort','Body Butter','Nourishing Face Balm','Hand & Foot Balm','Refills','Velvet Fragrance','Glycerin Soap']){
@@ -94,3 +95,10 @@ if(!products.every(p=>Number.isFinite(Number(p.price))&&Number(p.price)>0)) thro
 if(!products.every(p=>Array.isArray(p.images)&&p.images.length>0)) throw new Error('catalogue product missing image');
 
 console.log('Velvet Charms Studio USA catalogue PASS — 64 customer pieces; internal formula/source metadata withheld from public API');
+
+for(const id of ['portrait_2d','tray','blanket_medium','felt_family']){
+  const p=products.find(x=>x.id===id);
+  if(!p?.tags?.includes('gift')) throw new Error('gift discovery tag missing: '+id);
+}
+if(!products.find(x=>x.id==='pet_beanie')?.tags?.includes('pet')) throw new Error('pet discovery tag missing');
+if(!products.find(x=>x.id==='leather_bag_small')?.tags?.includes('wearable')) throw new Error('wearable discovery tag missing');
