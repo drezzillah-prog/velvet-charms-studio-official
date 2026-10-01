@@ -128,3 +128,7 @@ footer strong{color:var(--plum)!important}
 .life-custom-contact strong{display:block;font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:1.35rem;margin-bottom:.25rem}
 .life-custom-contact p{margin:.15rem 0 .75rem;color:var(--muted);line-height:1.6}
 .life-custom-contact a{display:inline-flex;padding:.68rem 1rem;border-radius:999px;background:var(--plum);color:#fff9fc;font-weight:700}
+
+.variant-summary{margin:.65rem 0 0;padding:.7rem .8rem;border:1px solid #ead3df;border-radius:14px;background:#fff8fc}
+.variant-summary strong{display:block;font-family:'Jost',sans-serif!important;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+.variant-summary span{display:block;color:var(--muted);font-size:.78rem;line-height:1.5}
