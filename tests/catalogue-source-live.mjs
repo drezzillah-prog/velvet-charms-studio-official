@@ -24,7 +24,10 @@ if(products.filter(p=>p.__supplier_formula_gate).length!==4) throw new Error('US
 const butter=products.find(p=>p.id==='us_body_butter_100');
 if(JSON.stringify(butter?.options?.scent)!==JSON.stringify(['Unscented'])) throw new Error('Body Butter must not inherit unsupported legacy scent variants');
 for(const p of products.filter(p=>p.id.startsWith('us_refill_'))) if(p.options?.scent||p.options?.vessel_preference) throw new Error(`refill inherited incompatible legacy options: ${p.id}`);
-for(const p of products.filter(p=>p.id.startsWith('us_solid_perfume_'))) if(p.options?.scent) throw new Error(`signature solid perfume inherited generic scent selector: ${p.id}`);
+for(const p of products.filter(p=>p.id.startsWith('us_solid_perfume_'))){
+  if(p.options?.scent) throw new Error(`signature solid perfume inherited generic scent selector: ${p.id}`);
+  if(!Array.isArray(p.options?.size)||p.options.size.length!==2) throw new Error(`solid perfume size variants missing: ${p.id}`);
+}
 const rollon=products.find(p=>p.id==='us_perfume_oil_rollon');
 if(!rollon||!Array.isArray(rollon.options?.scent)||rollon.options.scent.length<7) throw new Error('consolidated roll-on scent selector missing');
 if(!Array.isArray(rollon.options?.size)||rollon.options.size.length!==3) throw new Error('consolidated roll-on size selector missing');
