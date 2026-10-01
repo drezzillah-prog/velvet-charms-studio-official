@@ -19,7 +19,9 @@ if(textiles.length!==17) throw new Error(`Body Glow textiles missing: ${textiles
 if(studio.length!==14) throw new Error(`Studio care/fragrance/soap subset changed unexpectedly: ${studio.length}/14`);
 
 for(const category of ['Paintings & Portraits','Hair Accessories','Epoxy & Clay Creations','Leather Bags','Wall Clock','Bundles','Textiles & Comfort','Body Butter','Nourishing Face Balm','Hand & Foot Balm','Refills','Velvet Fragrance','Glycerin Soap']){
-  if(!payload.sections.some(s=>s.category?.name===category)) throw new Error('catalogue section missing: '+category);
+  const section=payload.sections.find(s=>s.category?.name===category);
+  if(!section) throw new Error('catalogue section missing: '+category);
+  if(!String(section.category?.customer_intro||'').trim()) throw new Error('customer intro missing: '+category);
 }
 
 if(products.some(p=>p.id==='us_perfume_oil_rollon'||/roll-?on/i.test(p.name||''))) throw new Error('roll-on perfume returned to Studio catalogue');
