@@ -89,8 +89,8 @@ function describeItem(raw,world,group){
   if(/preservation|bouquet|flowers?/.test(n))return 'A custom preservation-led keepsake intended to retain selected visual elements from flowers or event materials; feasibility and materials are assessed before acceptance.';
   if(/first tooth|first lock|hospital|sock|shoes|handprint|footprint|growth ribbon/.test(n))return 'A compact milestone keepsake for preserving or displaying one of the small physical traces that are easy to lose as a child grows.';
   if(/coordinates|where we|our first|place we|our city|our coast|map fragment|two places/.test(n))return 'A place-based keepsake that turns an address, coordinates, map reference or shared location into a discreet object tied to the customer’s own story.';
-  if(/soap/.test(n))return 'A small giftable cleansing favor concept that can be coordinated for an event only after the applicable product base, scent and documentation are cleared.';
-  if(/candle/.test(n))return 'A decorative favor concept reserved for a later compliant candle workstream; it is not treated as an immediately orderable Studio USA product.';
+  if(/soap/.test(n))return 'A small giftable cleansing-favor concept for coordinated events. This version is not available to order yet; contact us if you would like to be notified.';
+  if(/candle/.test(n))return 'A decorative candle-favor concept for a future release. It is not available to order yet, but you can contact us to register your interest.';
   if(/pet|paw|dog|cat/.test(n))return 'A pet-centered keepsake designed around a supplied photo, name, date, coordinates or memory, with materials and attachment details chosen for the intended use.';
   if(world==='vows')return 'A made-to-order wedding or celebration keepsake whose wording, color, materials and degree of personalization are confirmed before production.';
   if(world==='tides')return 'A made-to-order coastal keepsake built around place, shoreline memory and restrained material references rather than souvenir-shop styling.';
@@ -98,7 +98,7 @@ function describeItem(raw,world,group){
 }
 function itemStatus(raw){
   const t=String(raw).toLowerCase();
-  if(/candle|soap favor/.test(t)) return {label:'Safety-gated concept',kind:'gated'};
+  if(/candle|soap favor/.test(t)) return {label:'Coming soon',kind:'gated'};
   if(/commission|consultation|custom |request a quote|preservation|200\+/.test(t)) return {label:'Custom quote',kind:'quote'};
   return {label:'Made to order',kind:'made'};
 }
