@@ -31,6 +31,13 @@
     return 'catalogue.html?q='+encodeURIComponent(p.name);
   };
 
+  function featuredFallback(img){
+    if(!img||img.dataset.fallbackApplied)return;
+    img.dataset.fallbackApplied='true';
+    img.src='assets/velvet-charms-usa-hero.jpg';
+    img.classList.add('product-image-fallback');
+  }
+
   async function load(){
     const root=document.getElementById('featured-grid');
     if(!root)return;
@@ -66,5 +73,6 @@
     }
   }
 
+  document.addEventListener('error',e=>{if(e.target instanceof HTMLImageElement&&e.target.closest('.featured-grid'))featuredFallback(e.target)},true);
   load();
 })();
