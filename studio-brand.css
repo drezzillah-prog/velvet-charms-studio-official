@@ -153,3 +153,8 @@ footer strong{color:var(--plum)!important}
   .category-heading{display:block!important}
   .category-count{margin-top:.6rem!important}
 }
+
+.product-card .product-body>p:not(.product-size){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.product-card .product-body{display:flex;flex-direction:column}
+.product-card .product-actions{margin-top:auto}
+.product-card .price{margin-top:.85rem}
