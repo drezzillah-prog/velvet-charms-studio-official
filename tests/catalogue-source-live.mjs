@@ -38,6 +38,20 @@ for(const id of ['us_solid_perfume_ivory_hour','us_solid_perfume_veiled','us_sol
   if(!fs.existsSync('.'+p.images[0])) throw new Error('local solid perfume asset not found: '+p.images[0]);
 }
 
+
+const expectedUsPrices={
+  landscape_small:69,landscape_medium:119,portrait_2d:169,leather_bag_medium:229,
+  beanie_small:59,scarf_standard:99,winter_set:229,blanket_large:589,felt_family:219
+};
+for(const [id,price] of Object.entries(expectedUsPrices)){
+  const p=products.find(x=>x.id===id);
+  if(!p||Number(p.price)!==price) throw new Error(`USA positioning price mismatch: ${id} -> ${p?.price} expected ${price}`);
+}
+for(const p of [...art.filter(x=>!x.__inquiry_only),...textiles]){
+  if(!p.__made_to_order) throw new Error('handmade piece lost made-to-order status: '+p.id);
+  if(String(p.description||'').length<70) throw new Error('handmade product description is too thin: '+p.id);
+}
+
 const inquiryIds=['epoxy_lamp','wall_clock_large','relax_restore','cozy_winter','home_harmony'];
 for(const id of inquiryIds){
   const p=products.find(x=>x.id===id);
