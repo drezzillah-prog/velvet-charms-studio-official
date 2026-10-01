@@ -86,3 +86,9 @@ if(!studio.includes('matchesShop')||!studio.includes("case 'under-50'")||!studio
 if(!source.includes('shopTags')||!source.includes('tags:Array.isArray(p.shop_tags)')) throw new Error('catalogue shopping tags missing');
 if(!home.includes('FEATURED FROM THE STUDIO')||!home.includes('SHOP BY OCCASION')) throw new Error('homepage merchandising sections missing');
 for(const id of ['portrait_2d','tray','blanket_medium','felt_family','us_body_butter_100','us_solid_perfume_black_honey']) if(!featured.includes(id)) throw new Error('featured product missing: '+id);
+
+if(!cataloguePage.includes('id="catalogue-reset"')) throw new Error('catalogue reset control missing');
+if(!cataloguePage.includes('Looking for something more specific?')) throw new Error('customer custom-help strip missing');
+if(!studio.includes('function resetCatalogue()')||!studio.includes('data-reset-catalogue')) throw new Error('catalogue reset behavior missing');
+if(!studio.includes('Ask for example photos or a personalized quote.')) throw new Error('made-to-order example-photo CTA missing');
+if(!brand.includes('.catalogue-reset{')||!brand.includes('.example-photo-note{')) throw new Error('catalogue polish styles missing');
