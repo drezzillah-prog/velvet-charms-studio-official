@@ -15,3 +15,8 @@
 .idea-list li{margin:0!important;padding:.8rem .9rem;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.68)}
 .idea-name{display:block;font-family:'Cormorant Garamond',serif;color:var(--plum);font-size:1.08rem;line-height:1.2}
 .idea-description{display:block;margin-top:.28rem;color:var(--muted);font-size:.79rem;line-height:1.48}
+
+.idea-status{display:inline-flex;margin:0 0 .45rem;padding:.28rem .52rem;border-radius:999px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.idea-status.made{background:#f6e9f1;color:#6f3158}
+.idea-status.quote{background:#fff2cf;color:#72550b}
+.idea-status.gated{background:#efe9ed;color:#705d68}
