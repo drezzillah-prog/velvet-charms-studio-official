@@ -77,3 +77,5 @@ if(!studio.includes('product-size')) throw new Error('catalogue product sizing c
 const contactJs=fs.readFileSync('contact.js','utf8');
 if(!contactJs.includes("get('subject')")) throw new Error('Life Chapters quote links must prefill contact enquiry');
 if(!lifeJs.includes('itemStatus')||!lifeJs.includes('Made to order')||!lifeJs.includes('Custom quote')) throw new Error('Life Chapters product status badges missing');
+
+if(!studio.includes('variantSummary')||!studio.includes('variant-summary')) throw new Error('visible fragrance variant summaries missing');
