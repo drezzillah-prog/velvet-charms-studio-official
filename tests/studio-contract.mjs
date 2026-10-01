@@ -37,6 +37,9 @@ for(const token of ['ART_COMMIT = "a29437db52068129f0c5db9e7a6aa41de96fa929"','B
 if(!source.includes('for(const category of art.categories||[])')) throw new Error('complete Art & Gifts catalogue is not being loaded');
 if(!source.includes('decorateTextileCategory')) throw new Error('Body Glow textiles are not being loaded');
 if(!source.includes('ART_INQUIRY_IDS')) throw new Error('special Art & Gifts inquiry gate missing');
+if(!source.includes('ART_US_PRICE')||!source.includes('TEXTILE_US_PRICE')) throw new Error('explicit USA pricing maps missing');
+if(!source.includes('customerDescription')) throw new Error('customer-facing imported-product description layer missing');
+if(!source.includes('__made_to_order')) throw new Error('made-to-order catalogue classification missing');
 if(source.includes('us_perfume_oil_rollon')) throw new Error('roll-on mapping survived in catalogue source');
 if(source.includes('common.scent=["Unscented"]')) throw new Error('fake one-choice scent selector survived');
 
@@ -53,7 +56,7 @@ if(!read('life-chapters.html').includes('Looking for custom wedding pieces, exam
 
 if(!studio.includes('64 pieces') && !studio.includes('state.meta.size')) throw new Error('catalogue customer count is not dynamic');
 if(studio.includes('USA V1')||studio.includes('Documentation pending')||studio.includes('source-note')) throw new Error('internal catalogue language survived in browser UI');
-if(!studio.includes('Custom inquiry')||!studio.includes('Coming soon')) throw new Error('customer-facing product statuses missing');
+if(!studio.includes('Custom inquiry')||!studio.includes('Coming soon')||!studio.includes('Made to order')) throw new Error('customer-facing product statuses missing');
 if(!studio.includes('variantSummary')) throw new Error('visible fragrance size summary missing');
 if(!studio.includes("e.key!=='Escape'")) throw new Error('Escape handling missing');
 if(!studio.includes("document.body.classList.add('cart-open')")) throw new Error('cart drawer interaction missing');
