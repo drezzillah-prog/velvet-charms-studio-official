@@ -6,7 +6,7 @@ const required=[
   'data/us-v1-products.js','lib/catalogue-source.js','api/create-order.js','api/capture-order.js',
   'assets/velvet-charms-usa-hero.jpg',
   'assets/solid-perfume-ivory-hour.svg','assets/solid-perfume-veiled.svg',
-  'assets/solid-perfume-black-honey.svg','assets/solid-perfume-sacred-smoke.svg','USA_IMPORTED_CATALOGUE_PRICING.md'
+  'assets/solid-perfume-black-honey.svg','assets/solid-perfume-sacred-smoke.svg','USA_IMPORTED_CATALOGUE_PRICING.md','home-featured.js'
 ];
 for(const file of required) if(!fs.existsSync(file)) throw new Error('required Studio file missing: '+file);
 
@@ -79,3 +79,10 @@ if(!studio.includes('matchesSearch')||!studio.includes('sortItems')) throw new E
 if(!source.includes('CATEGORY_INTRO')) throw new Error('curated category introductions missing');
 if(!source.includes('USA_PRICE_MISSING')) throw new Error('imported products can still fall back to non-USA prices');
 if(!read('USA_IMPORTED_CATALOGUE_PRICING.md').includes('does **not** convert the European list price mechanically into USD')) throw new Error('USA imported-pricing guardrail missing');
+
+const home=read('index.html'), catalogue=read('catalogue.html'), featured=read('home-featured.js');
+if(!catalogue.includes('data-shop="gifts"')||!catalogue.includes('data-shop="under-50"')||!catalogue.includes('data-shop="custom"')) throw new Error('shop-by occasion discovery missing');
+if(!studio.includes('matchesShop')||!studio.includes("case 'under-50'")||!studio.includes("case 'pets'")) throw new Error('shop-by filter behavior missing');
+if(!source.includes('shopTags')||!source.includes('tags:Array.isArray(p.shop_tags)')) throw new Error('catalogue shopping tags missing');
+if(!home.includes('FEATURED FROM THE STUDIO')||!home.includes('SHOP BY OCCASION')) throw new Error('homepage merchandising sections missing');
+for(const id of ['portrait_2d','tray','blanket_medium','felt_family','us_body_butter_100','us_solid_perfume_black_honey']) if(!featured.includes(id)) throw new Error('featured product missing: '+id);
