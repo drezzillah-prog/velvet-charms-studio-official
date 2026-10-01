@@ -41,7 +41,6 @@ The current USA retail matrix is a market-positioning proposal. It is NOT a clai
 | Nourishing Face Balm Refill | $25 |
 | Hand & Foot Balm Refill | $21 |
 | Solid Perfume 0.35 oz / 10 g | $32 |
-| Velvet Perfume Oil Roll-On 0.34 fl oz / 10 mL planning anchor | $22 |
 | Exfoliating Glycerin Soap 100 g | $14 |
 | Herbal Glycerin Soap 100 g | $14 |
 | Flower-Shaped Glycerin Soap 100 g | $16 |
@@ -54,4 +53,26 @@ Before STORE_LIVE=true, replace every unknown cost with a real invoice/quote val
 Fragrance-gated and supplier-formula-gated products remain blocked regardless of pricing status until their existing technical launch gates are cleared.
 
 
-The roll-on catalogue is intentionally consolidated into one configurable product. Final retail by 5 mL / 10 mL / 15 mL size must be margin-tested separately before STORE_LIVE.\n
+
+## Imported handmade collection — current USA positioning
+
+The Studio does not display the original European list price with a dollar sign. The U.S. storefront has an explicit USD positioning matrix for the pinned Art & Gifts and textile catalogue. These are commercial list-price proposals, not proof of margin.
+
+Representative anchors:
+- Small Landscape Painting — $69
+- Medium Landscape Painting — $119
+- Large Landscape Painting — $199
+- 2D Portrait — $169
+- 3D Portrait Relief — $249
+- Couple or Family Portrait — $319
+- Custom Hair Set — $79
+- Epoxy Tray — $79
+- Leather Bag Small / Medium / Large — $159 / $229 / $299
+- Hand-Knitted Beanies — $59–$74
+- Hand-Knitted Scarf — $99
+- Matching Winter Set — $229
+- Braided Blankets — $219 / $399 / $589
+- Felted Animal Small / Medium — $49 / $85
+- Felted Animal Family Set — $219
+
+The full map lives in `lib/catalogue-source.js`. Before online checkout is enabled for any imported handmade SKU, replace unknown material, labor, packaging and seller-paid fulfillment assumptions with real current costs and re-run the margin check.
