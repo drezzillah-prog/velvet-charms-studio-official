@@ -236,3 +236,16 @@ footer strong{color:var(--plum)!important}
   .product-dialog{max-height:92vh;overflow:auto}
   .dialog-wrap{grid-template-columns:1fr!important}
 }
+
+.catalogue-jump{display:flex;align-items:center;gap:.7rem;margin:1rem 0;padding:.72rem .82rem;border:1px solid #e8cfdd;border-radius:18px;background:rgba(255,253,253,.92);box-shadow:0 10px 24px rgba(59,18,48,.045)}
+.catalogue-jump-label{flex:0 0 auto;color:var(--gold);font:800 .66rem/1 'Jost',sans-serif;letter-spacing:.11em;text-transform:uppercase}
+.catalogue-jump-links{display:flex;gap:.42rem;overflow-x:auto;scrollbar-width:thin;padding:.08rem 0 .16rem;scroll-behavior:smooth}
+.catalogue-jump-links a{flex:0 0 auto;padding:.5rem .7rem;border:1px solid #e3cbd8;border-radius:999px;background:#fffdfd;color:var(--mauve);font:750 .71rem/1 'Jost',sans-serif;text-decoration:none;white-space:nowrap;transition:.18s ease}
+.catalogue-jump-links a:hover,.catalogue-jump-links a:focus-visible{background:var(--plum);border-color:var(--plum);color:#fff9fc;outline:none}
+.category-block{scroll-margin-top:105px}
+@media(max-width:760px){
+  .catalogue-jump{position:sticky;top:0;z-index:22;margin-left:-.35rem;margin-right:-.35rem;border-radius:14px;padding:.58rem .62rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .catalogue-jump-label{display:none}
+  .catalogue-jump-links{width:100%}
+  .category-block{scroll-margin-top:74px}
+}
