@@ -11,6 +11,10 @@ const products=payload.sections.flatMap(s=>flatten(s.category));
 if(products.length!==64) throw new Error(`full Studio catalogue should contain 64 pieces, found ${products.length}`);
 
 for(const p of products){
+  const customerText=[p.name,p.size,p.description,...Object.values(p.options||{}).flat()].filter(Boolean).join(' ');
+  for(const pattern of [/\bV1\b/i,/pre-?launch/i,/STORE_LIVE/i,/supplier/i,/formula/i,/prototype/i,/documentation pending/i,/source snapshot/i,/repository/i,/launch gates?/i]){
+    if(pattern.test(customerText)) throw new Error('internal wording leaked into customer product: '+p.id+' -> '+pattern);
+  }
   for(const key of Object.keys(p)){
     if(key.startsWith('__')) throw new Error('internal product field leaked publicly: '+p.id+' -> '+key);
   }
