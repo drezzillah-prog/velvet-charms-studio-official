@@ -19,6 +19,7 @@
   const $=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const label=k=>String(k||'').replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+  const slug=v=>String(v||'collection').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 
   function loadCart(){
     try{
@@ -157,6 +158,16 @@
       }
       state.sections.push(normalized);
     }
+    renderCategoryJump();
+  }
+
+  function renderCategoryJump(){
+    const root=$('#catalogue-jump-links');
+    if(!root)return;
+    root.innerHTML=state.sections.map(section=>{
+      const name=section.category?.name||'Collection';
+      return `<a href="#collection-${esc(slug(name))}" data-jump-category="${esc(name)}">${esc(name)}</a>`;
+    }).join('');
   }
 
   function variantSummary(product){
@@ -214,7 +225,7 @@
       `${name?`<h3 class="subcategory-title">${esc(name)}</h3>`:''}<div class="product-grid">${items.map(card).join('')}</div>`
     ).join('');
     const intro=String(section.category?.customer_intro||'').trim();
-    return `<section class="category-block">
+    return `<section class="category-block" id="collection-${esc(slug(section.category?.name||'collection'))}">
       <div class="category-heading">
         <div><h2>${esc(section.category?.name||'Collection')}</h2>${intro?`<p class="category-intro">${esc(intro)}</p>`:''}</div>
         <p class="category-count">${filtered.length} ${filtered.length===1?'piece':'pieces'}</p>
@@ -413,7 +424,17 @@
   document.addEventListener('click',e=>{
     const t=e.target.closest('button,[data-open-image],[data-lightbox-src]');
     if(!t)return;
-    if(t.id==='catalogue-reset'||t.dataset.resetCatalogue!==undefined)resetCatalogue();
+    if(t.dataset.jumpCategory!==undefined){
+      state.family='all';
+      state.shop='all';
+      state.search='';
+      const search=$('#catalogue-search'); if(search)search.value='';
+      const familyButton=document.querySelector('.filter[data-filter="all"]'); if(familyButton)setActiveFamily(familyButton);
+      const shopButton=document.querySelector('[data-shop="all"]'); if(shopButton)setActiveShop(shopButton);
+      render();
+      syncUrlState();
+    }
+    else if(t.id==='catalogue-reset'||t.dataset.resetCatalogue!==undefined)resetCatalogue();
     else if(t.matches('[data-open-cart]'))openCart();
     else if(t.matches('[data-close-cart]')||t.id==='cart-backdrop')closeCart();
     else if(t.dataset.details)openProduct(t.dataset.details,false);
