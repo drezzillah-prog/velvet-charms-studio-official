@@ -2,7 +2,7 @@ name: Studio Integrity
 
 on:
   push:
-    branches: [main]
+    branches: [main, launch/us-v1-20260916]
   pull_request:
     branches: [main]
 

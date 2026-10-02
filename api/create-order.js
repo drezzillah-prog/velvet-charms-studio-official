@@ -51,6 +51,7 @@ export default async function handler(req, res) {
   if (!storeIsLive()) return res.status(503).json({ error: "The Studio checkout is not live yet." });
   try {
     const market = marketFromRequest(req);
+    if (market !== "US") return res.status(403).json({ error: "Velvet Charms Studio checkout is currently available only to customers in the United States." });
     const items = await validateCart(req.body?.cart, market);
     const date = requestedDate(req.body?.cart);
     const cartHash = fingerprint(items, date);
@@ -82,15 +83,7 @@ export default async function handler(req, res) {
             ...(description(item, date, index) ? { description: description(item, date, index) } : {})
           }))
         }],
-        payment_source: {
-          paypal: {
-            experience_context: {
-              user_action: "PAY_NOW",
-              return_url: `${siteUrl}/catalogue.html?payment=success`,
-              cancel_url: `${siteUrl}/catalogue.html?payment=cancelled`
-            }
-          }
-        }
+        payment_source: { paypal: { experience_context: { user_action: "PAY_NOW", return_url: `${siteUrl}/catalogue.html?payment=success`, cancel_url: `${siteUrl}/catalogue.html?payment=cancelled` } } }
       })
     });
 
@@ -105,6 +98,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Studio create order error", error);
     if (["INVALID_CART", "INVALID_PRICE", "INVALID_CUSTOMIZATION"].includes(error.message)) return res.status(400).json({ error: "The cart or customization details are invalid." });
+    if (error.message === "UNSUPPORTED_MARKET") return res.status(403).json({ error: "Velvet Charms Studio checkout is currently available only to customers in the United States." });
     if (error.message === "PAYPAL_NOT_CONFIGURED") return res.status(503).json({ error: "PayPal is not configured yet." });
     return res.status(500).json({ error: "Checkout could not be started." });
   }

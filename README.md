@@ -1,93 +1,92 @@
-# Velvet Charms Studio — official
+# Velvet Charms Studio USA — storefront architecture
 
-Independent Phase 1 storefront for the Velvet Charms umbrella brand.
+This repository is the **only writable codebase for Velvet Charms Studio USA**.
 
 ## Non-negotiable isolation rule
 
-This repository is the **only writable codebase for Velvet Charms Studio**.
-
-The existing repositories remain separate and are read-only source references:
+The original Velvet Charms websites are source references only and must not be modified by Studio work:
 
 - `drezzillah-prog/velvet-charms-body-glow-official`
 - `drezzillah-prog/velvet-charms-art-gifts-official`
 
-Studio never writes to, deletes from, renames, migrates, restructures, merges into or otherwise modifies either original repository.
+Studio may read pinned catalogue/image snapshots from them. It must never delete, rename, rewrite, merge into or otherwise alter either original repository.
 
-## Immutable source snapshots
+## Non-negotiable catalogue rule
 
-The Studio catalogue reads fixed, immutable commits:
+**Do not collapse Studio USA back to a small body-care-only catalogue.**
+
+The customer catalogue is the union of:
+
+1. the complete pinned Art & Gifts catalogue;
+2. the pinned Body Glow `Knitted & Braided Wool Creations` collection;
+3. the Studio-owned U.S. care/fragrance/soap subset;
+4. Life Chapters as the made-to-order commission universe.
+
+The current pinned source snapshots are:
 
 - Art & Gifts: `a29437db52068129f0c5db9e7a6aa41de96fa929`
 - Body Glow: `543bad871521bc1dace35cdf5d02b0f6aa2de279`
 
-This prevents later changes in the original websites from silently changing the Studio launch selection.
+Art & Gifts bundles and the powered lamp/clock remain visible to the customer as **custom inquiry** pieces rather than entering standard checkout.
 
-## Phase 1 sale allowlist
+## Studio-owned U.S. care subset
 
-### Art & Gifts
-Sellable from the Art & Gifts snapshot except:
+Current care products:
 
-- `Bundles` — excluded because current bundle recipes include candles and/or cosmetics;
-- `epoxy_lamp` — excluded pending separate powered/electrical product conformity review;
-- `wall_clock_large` — excluded pending separate powered/electrical mechanism conformity review.
+- Body Butter — unscented;
+- Nourishing Face Balm — unscented;
+- Hand & Foot Balm — unscented;
+- same-formula refills — unscented;
+- Solid Perfume — IVORY HOUR, VEILED, BLACK HONEY, SACRED SMOKE;
+- selected glycerin soaps.
 
-### Body Glow source
-Sellable:
+There is **no Perfume Oil Roll-On product in the Studio USA catalogue**.
 
-- `Knitted & Braided Wool Creations` only.
+Do not add a scent selector to the unscented body balms or their refills.
 
-Preview only, never server-accepted for checkout:
+Solid perfume uses weight-based sizes:
 
-- `Candles`, pending formulation-specific CLP / safety-label review.
+- Net Wt. 0.18 oz / 5 g;
+- Net Wt. 0.35 oz / 10 g.
 
-Explicitly excluded from Studio Phase 1 sale:
+## Public-copy rule
 
-- Body Care;
-- Soaps;
-- Perfumes;
-- cosmetic refills;
-- bundles containing cosmetics or uncleared candles.
+Customer-facing pages must not expose internal project-management or deployment language such as:
 
-The full Body Glow and Art & Gifts websites remain intact for their later separate relaunch under the Velvet Charms Studio umbrella.
+- “V1”;
+- “pre-launch” / “launch gates”;
+- `STORE_LIVE`;
+- “documentation pending”;
+- source-snapshot / source-pin explanations;
+- internal regulatory work notes.
 
-## Checkout architecture
+Customer-facing alternatives are simple statuses such as **Coming soon**, **Custom inquiry**, or **Online checkout is temporarily unavailable**.
 
-Studio has its own isolated PayPal flow:
+Technical gates remain server-side.
 
-- `/api/create-order.js` validates every cart item, quantity, option and server-side price against the Studio allowlist before creating a PayPal order;
-- `/api/capture-order.js` re-validates the cart and compares the approved PayPal items and total before capture;
-- checkout settles in EUR;
-- Romanian list prices can be displayed in RON while the corresponding deterministic Studio EUR amount is used for PayPal;
-- no PayPal secret is stored in the repository.
+## Checkout
 
-Public payment creation is additionally gated by `STORE_LIVE=true`. Keep it false or unset until legal identity and the real PayPal account are verified.
+Studio USA uses USD and a U.S. market gate. Standard checkout uses PayPal when enabled.
 
-Required Vercel environment variables for live checkout:
+Server-side checkout must:
 
-- `STORE_LIVE=true`
-- `PAYPAL_ENV=live`
-- `PAYPAL_CLIENT_ID`
-- `PAYPAL_CLIENT_SECRET` (or `PAYPAL_SECRET`)
+- validate every product against the current Studio catalogue;
+- reject custom-inquiry / coming-soon products;
+- validate quantity and allowed options;
+- validate the U.S. market;
+- keep payment creation and capture behind the store-live gate;
+- never hardcode PayPal secrets.
 
-Optional order/contact notification variables:
+## Life Chapters
 
-- `FORMSPREE_ENDPOINT` or `FORMSPREE_FORM_ID`
+Velvet Vows, Velvet Tides and Velvet Beginnings remain part of Studio USA. Large/custom catalogues should use:
 
-## Remaining external launch inputs
+- clear customer-facing product descriptions;
+- `Made to order`, `Custom quote`, or similar customer statuses;
+- representative example photos rather than requiring unique imagery for every variation;
+- contact/quote CTAs for highly customized pieces.
 
-Code can be deployed safely before checkout is enabled. Before setting `STORE_LIVE=true`, complete these real-world inputs:
-
-1. final PFA legal name, registration/fiscal identifiers and professional address;
-2. official customer-contact email/details;
-3. PayPal LIVE credentials belonging to the intended business account;
-4. controlled real end-to-end payment verification;
-5. final shipping process and customer-facing shipping wording;
-6. product-safety/GPSR information for the Phase 1 sale products;
-7. candle-specific review remains separate and candles stay non-sale until cleared.
-
-See `PRODUCT_LAUNCH_MATRIX.md`.
-
-## Integrity tests
+## Integrity
 
 Run:
 
@@ -95,4 +94,4 @@ Run:
 npm test
 ```
 
-The test contract checks immutable source pins, the cosmetic/electrical exclusion gates, server-side validation, checkout launch gating and the absence of hardcoded PayPal secrets. GitHub Actions runs the same contract for repository changes.
+Tests should protect the full-catalogue architecture, the source-repository isolation rule, unscented body-care options, the absence of roll-on perfume, customer-facing copy hygiene, server-side checkout gates and the approved Studio-owned solid-perfume images.
