@@ -422,7 +422,7 @@
   }
 
   document.addEventListener('click',e=>{
-    const t=e.target.closest('button,[data-open-image],[data-lightbox-src]');
+    const t=e.target.closest('button,a[data-jump-category],[data-open-image],[data-lightbox-src]');
     if(!t)return;
     if(t.dataset.jumpCategory!==undefined){
       state.family='all';
