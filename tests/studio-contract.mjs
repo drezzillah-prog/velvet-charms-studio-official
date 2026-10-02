@@ -92,3 +92,9 @@ if(!cataloguePage.includes('Looking for something more specific?')) throw new Er
 if(!studio.includes('function resetCatalogue()')||!studio.includes('data-reset-catalogue')) throw new Error('catalogue reset behavior missing');
 if(!studio.includes('Ask for example photos or a personalized quote.')) throw new Error('made-to-order example-photo CTA missing');
 if(!brand.includes('.catalogue-reset{')||!brand.includes('.example-photo-note{')) throw new Error('catalogue polish styles missing');
+
+if(!cataloguePage.includes('id="catalogue-jump-links"')) throw new Error('full-catalogue quick-jump navigation missing');
+if(!studio.includes('renderCategoryJump')||!studio.includes('data-jump-category')) throw new Error('catalogue quick-jump behavior missing');
+if(!brand.includes('.catalogue-jump{')||!brand.includes('.catalogue-jump-links{')) throw new Error('catalogue quick-jump styles missing');
+if(!studio.includes("img.dataset.fallbackApplied='true'")||!studio.includes("assets/velvet-charms-usa-hero.jpg")) throw new Error('catalogue image fallback protection missing');
+if(!featured.includes('featuredFallback')||!featured.includes('velvet-charms-usa-hero.jpg')) throw new Error('homepage featured image fallback protection missing');
